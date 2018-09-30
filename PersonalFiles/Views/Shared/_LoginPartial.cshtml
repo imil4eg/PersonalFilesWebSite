@@ -1,0 +1,22 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    @using(Html.BeginForm("LogOff", "Security", FormMethod.Post, new { id = "logoutForm", @class = "login_form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="login_form">
+            <li>
+                @Html.ActionLink(User.Identity.Name, "", "", routeValues: null, htmlAttributes: new { title = "Личный кабинет" })
+            </li>
+            <li>@Html.ActionLink("Личный кабинет", "Profile", "Profile")</li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right collapselogin_form">
+        <li><a asp-area="" asp-controller="Secutity" asp-action="Login">Войти</a></li>
+        <li><a asp-area="" asp-controller="Security" asp-action="Register">Регистрация</a></li>
+    </ul>
+}
