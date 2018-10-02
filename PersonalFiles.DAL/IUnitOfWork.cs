@@ -4,16 +4,15 @@ namespace PersonalFiles.DAL
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<Person> Persons { get; }
-        IRepository<Education> Educations { get; }
-        IRepository<Autobiography> Authobiographys { get; }
-        IRepository<InsurancePolicy> Insurances { get; }
-        IRepository<MilitaryID> MilitaryIDs { get; }
-        IRepository<OtherDocument> OthreDocuments { get; }
-        IRepository<Passport> Passports { get; }
-        IRepository<ScientificWork> ScientificWorks { get; }
-        IRepository<WorkBook> WorkBooks { get; }
-        IRepository<WorkContract> WorkContacts { get; }
-        void Save();
+        IPersonRepository Persons { get; }
+        IEducationRepository Educations { get; }
+        IAutobiographyRepository Authobiographys { get; }
+        IInsurancePolicyRepository Insurances { get; }
+        IMilitaryIdRepository MilitaryIDs { get; }
+        IOtherDocumentRepository OtherDocuments { get; }
+        IPassportRepository Passports { get; }
+        IScientificWorkRepository ScientificWorks { get; }
+        IWorkBookRepository WorkBooks { get; }
+        IWorkContactRepository WorkContacts { get; }
     }
 }

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalFiles", "PersonalFi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalFiles.Tests", "PersonalFiles.Tests\PersonalFiles.Tests.csproj", "{709C3C87-E30F-4DC0-AD24-4104A5C966F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFiles.DAL", "PersonalFiles.DAL\PersonalFiles.DAL.csproj", "{DD4BEEE5-C8A9-4DCD-A711-6B5260601663}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalFiles.DAL", "PersonalFiles.DAL\PersonalFiles.DAL.csproj", "{DD4BEEE5-C8A9-4DCD-A711-6B5260601663}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
