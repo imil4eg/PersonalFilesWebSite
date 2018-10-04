@@ -13,12 +13,12 @@ namespace PersonalFiles.DAL
             this.connectionString = connectionString;
         }
 
-        public void Create(WorkBook item)
+        public WorkBook Create(WorkBook item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public int Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace PersonalFiles.DAL
             throw new NotImplementedException();
         }
 
-        public void Update(WorkBook item)
+        public bool Update(WorkBook item)
         {
             throw new NotImplementedException();
         }

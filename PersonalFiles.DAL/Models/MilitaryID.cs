@@ -21,6 +21,6 @@ namespace PersonalFiles.DAL
 
         public string Rank { get; set; }
 
-        public string GivedBy { get; set; }
+        public string GaveBy { get; set; }
     }
 }

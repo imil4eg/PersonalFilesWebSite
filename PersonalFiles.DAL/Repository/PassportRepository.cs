@@ -13,12 +13,12 @@ namespace PersonalFiles.DAL
             _connectionString = connection;
         }
 
-        public void Create(Passport item)
+        public Passport Create(Passport item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public int Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace PersonalFiles.DAL
             throw new NotImplementedException();
         }
 
-        public void Update(Passport item)
+        public bool Update(Passport item)
         {
             throw new NotImplementedException();
         }

@@ -13,12 +13,12 @@ namespace PersonalFiles.DAL
             _connectionString = connection;
         }
 
-        public void Create(InsurancePolicy item)
+        public InsurancePolicy Create(InsurancePolicy item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public int Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace PersonalFiles.DAL
             throw new NotImplementedException();
         }
 
-        public void Update(InsurancePolicy item)
+        public bool Update(InsurancePolicy item)
         {
             throw new NotImplementedException();
         }

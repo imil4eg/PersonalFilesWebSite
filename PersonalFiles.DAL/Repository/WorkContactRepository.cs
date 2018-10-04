@@ -13,32 +13,32 @@ namespace PersonalFiles.DAL
             this.connectionString = connectionString;
         }
 
-        public void Create(WorkBook item)
+        public WorkContract Create(WorkContract item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public int Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<WorkBook> Find(Expression<Func<WorkBook, bool>> predicate)
+        public IEnumerable<WorkContract> Find(Expression<Func<WorkContract, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public WorkBook Get(int id)
+        public WorkContract Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<WorkBook> GetAll()
+        public IEnumerable<WorkContract> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(WorkBook item)
+        public bool Update(WorkContract item)
         {
             throw new NotImplementedException();
         }

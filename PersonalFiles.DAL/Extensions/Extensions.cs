@@ -6,7 +6,7 @@ namespace PersonalFiles.DAL
     {
         public static Type GetValue<Type>(this SqlDataReader reader, int index)
         {
-            return (Type)reader.GetValue(index);
+            return reader.IsDBNull(index) ? default(Type) : (Type)reader.GetValue(index);
         }
     }
 }

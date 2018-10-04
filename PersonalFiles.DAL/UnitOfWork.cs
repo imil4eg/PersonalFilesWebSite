@@ -1,8 +1,17 @@
-﻿namespace PersonalFiles.DAL
+﻿using Microsoft.Extensions.Configuration;
+
+namespace PersonalFiles.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public UnitOfWork(string connectionString)
+        private readonly string connectionString;
+
+        public UnitOfWork(IConfiguration configuration)
+        {
+            connectionString = configuration.GetConnectionString("DefaultConnection"); 
+        }
+
+        public UnitOfWork()
         {
             Persons = new PersonRepository(connectionString);
             Educations = new EducationRepository(connectionString);

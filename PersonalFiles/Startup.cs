@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalFiles.DAL;
 
 namespace PersonalFiles
 {
@@ -26,6 +28,12 @@ namespace PersonalFiles
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUserStore<ApplicationUser>, UserStore>();
+            services.AddTransient<IRoleStore<ApplicationRole>, RoleStore>();
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

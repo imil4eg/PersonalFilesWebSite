@@ -6,9 +6,12 @@ C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\bin\Debug\netc
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\bin\Debug\netcoreapp2.1\PersonalFiles.Tests.runtimeconfig.dev.json
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\bin\Debug\netcoreapp2.1\PersonalFiles.Tests.dll
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\bin\Debug\netcoreapp2.1\PersonalFiles.Tests.pdb
+C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\bin\Debug\netcoreapp2.1\PersonalFiles.DAL.dll
+C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\bin\Debug\netcoreapp2.1\PersonalFiles.DAL.pdb
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\obj\Debug\netcoreapp2.1\PersonalFiles.Tests.csprojAssemblyReference.cache
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\obj\Debug\netcoreapp2.1\PersonalFiles.Tests.csproj.CoreCompileInputs.cache
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\obj\Debug\netcoreapp2.1\PersonalFiles.Tests.AssemblyInfoInputs.cache
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\obj\Debug\netcoreapp2.1\PersonalFiles.Tests.AssemblyInfo.cs
+C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\obj\Debug\netcoreapp2.1\PersonalFiles.Tests.csproj.CopyComplete
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\obj\Debug\netcoreapp2.1\PersonalFiles.Tests.dll
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.Tests\obj\Debug\netcoreapp2.1\PersonalFiles.Tests.pdb

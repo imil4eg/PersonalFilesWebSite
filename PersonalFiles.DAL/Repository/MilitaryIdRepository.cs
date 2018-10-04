@@ -13,12 +13,12 @@ namespace PersonalFiles.DAL
             _connectionString = connection;
         }
 
-        public void Create(MilitaryID item)
+        public MilitaryID Create(MilitaryID item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public int Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace PersonalFiles.DAL
             throw new NotImplementedException();
         }
 
-        public void Update(MilitaryID item)
+        public bool Update(MilitaryID item)
         {
             throw new NotImplementedException();
         }

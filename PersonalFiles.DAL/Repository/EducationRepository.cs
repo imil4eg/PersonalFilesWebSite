@@ -13,12 +13,12 @@ namespace PersonalFiles.DAL
             _connectionString = connection;
         }
 
-        public void Create(Education item)
+        public Education Create(Education item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public int Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace PersonalFiles.DAL
             throw new NotImplementedException();
         }
 
-        public void Update(Education item)
+        public bool Update(Education item)
         {
             throw new NotImplementedException();
         }

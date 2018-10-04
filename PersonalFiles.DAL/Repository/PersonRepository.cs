@@ -15,7 +15,7 @@ namespace PersonalFiles.DAL
             _connectionString = connectionString;
         }
 
-        public void Create(Person item)
+        public Person Create(Person item)
         {
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -24,9 +24,10 @@ namespace PersonalFiles.DAL
                 {
                     using(SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = $"INSERT INTO Persons (Id, LastName, FirstName, MiddleName, Gender, SNILS, INN)" +
-                            $"VALUES (@param1, @param2, @param3, @param4, @param5, @param6)";
+                        cmd.CommandText = $"INSERT INTO [Person] (Id, LastName, FirstName, MiddleName, Gender, SNILS, INN)" +
+                            $"VALUES (@param0, @param1, @param2, @param3, @param4, @param5, @param6)";
 
+                        cmd.Parameters.Add("@param0", SqlDbType.BigInt).Value = item.Id;
                         cmd.Parameters.Add("@param1", SqlDbType.NVarChar, 150).Value = item.LastName;
                         cmd.Parameters.Add("@param2", SqlDbType.NVarChar, 100).Value = item.FirstName;
                         cmd.Parameters.Add("@param3", SqlDbType.NVarChar, 150).Value = item.MiddleName;
@@ -38,9 +39,11 @@ namespace PersonalFiles.DAL
                     }
                 }
             }
+
+            return item;
         }
 
-        public void Delete(int id)
+        public int Delete(int id)
         {
             using(SqlConnection con = new SqlConnection(_connectionString))
             {
@@ -54,6 +57,8 @@ namespace PersonalFiles.DAL
                     }
                 }
             }
+
+            return id;
         }
 
         public IEnumerable<Person> Find(Expression<Func<Person, bool>> predicate)
@@ -132,7 +137,7 @@ namespace PersonalFiles.DAL
             return persons;
         }
 
-        public void Update(Person item)
+        public bool Update(Person item)
         {
             using(SqlConnection con = new SqlConnection(_connectionString))
             {
@@ -141,7 +146,8 @@ namespace PersonalFiles.DAL
                 {
                     using(SqlCommand cmd = new SqlCommand())
                     {
-                        cmd.CommandText = $"UPDATE Person SET LastName = @param1, FirstName = @param2" +
+                        cmd.Connection = con;
+                        cmd.CommandText = $"UPDATE [Person] SET LastName = @param1, FirstName = @param2, " +
                             $"MiddleName = @param3, Gender = @param4, SNILS = @param5, INN = @param6";
 
                         cmd.Parameters.Add("@param1", SqlDbType.NVarChar).Value = item.LastName;
@@ -155,6 +161,8 @@ namespace PersonalFiles.DAL
                     }
                 }
             }
+
+            return true;
         }
     }
 }

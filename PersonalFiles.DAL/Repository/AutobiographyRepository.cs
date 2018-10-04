@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq.Expressions;
 
 namespace PersonalFiles.DAL
@@ -13,14 +15,26 @@ namespace PersonalFiles.DAL
             _connectionString = connection;
         }
 
-        public void Create(Autobiography item)
+        public Autobiography Create(Autobiography item)
         {
-            throw new NotImplementedException();
+            using(SqlConnection con = new SqlConnection(_connectionString))
+            {
+                con.Open();
+                if(con.State == ConnectionState.Open)
+                {
+                    using(SqlCommand cmd = con.CreateCommand())
+                    {
+                        cmd.CommandText = "INSERT INTO Autobiography";
+                    }
+                }
+            }
+
+            return item;
         }
 
-        public void Delete(int id)
+        public int Delete(int id)
         {
-            throw new NotImplementedException();
+            return id;
         }
 
         public IEnumerable<Autobiography> Find(Expression<Func<Autobiography, bool>> predicate)
@@ -38,7 +52,7 @@ namespace PersonalFiles.DAL
             throw new NotImplementedException();
         }
 
-        public void Update(Autobiography item)
+        public bool Update(Autobiography item)
         {
             throw new NotImplementedException();
         }

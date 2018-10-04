@@ -115,7 +115,7 @@ else
             WriteLiteral("    <ul class=\"nav navbar-nav navbar-right collapselogin_form\">\r\n        <li>");
             EndContext();
             BeginContext(691, 69, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "72c89fb002874393b7b6273b75dd0299", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b93461ed1bf944a88666b01455ad89f4", async() => {
                 BeginContext(751, 5, true);
                 WriteLiteral("Войти");
                 EndContext();
@@ -141,7 +141,7 @@ else
             WriteLiteral("</li>\r\n        <li>");
             EndContext();
             BeginContext(779, 78, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4d8fa821d9134d25a1968d7e02ab870f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "be620ed69bc6401b83aa6b8f8011bcb9", async() => {
                 BeginContext(842, 11, true);
                 WriteLiteral("Регистрация");
                 EndContext();
