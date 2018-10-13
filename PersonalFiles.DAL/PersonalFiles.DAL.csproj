@@ -26,4 +26,8 @@
     <Folder Include="AppData\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.5" />
+  </ItemGroup>
+
 </Project>

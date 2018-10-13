@@ -11,6 +11,6 @@ namespace PersonalFiles.DAL
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         TEntity Create(TEntity item);
         bool Update(TEntity item);
-        int Delete(int id);
+        bool Delete(int id);
     }
 }

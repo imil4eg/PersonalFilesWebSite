@@ -19,6 +19,9 @@ namespace PersonalFiles.Models
         [DisplayName("Подтверждение пароля")]
         [DataType(DataType.Password)]
         public string PasswordConfirm { get; set; }
+        
+        [DisplayName("Эл. почта")]
+        public string Email { get; set; }
 
         [DisplayName("Фамилия")]
         public string LastName { get; set; }
@@ -35,5 +38,8 @@ namespace PersonalFiles.Models
 
         [DisplayName("Пол")]
         public Gender Gender { get; set; }
+
+        [DisplayName("Телефон")]
+        public string Phone { get; set; }
     }
 }

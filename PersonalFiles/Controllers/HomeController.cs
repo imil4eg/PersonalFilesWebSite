@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using PersonalFiles.Models;
 
@@ -27,6 +29,7 @@ namespace PersonalFiles.Controllers
 
         public IActionResult Privacy()
         {
+        
             return View();
         }
 

@@ -1,6 +1,6 @@
-﻿using PersonalFiles.DAL;
-using System.Data.SqlClient;
-using System.Text;
+﻿using Microsoft.Extensions.Configuration;
+using Moq;
+using PersonalFiles.DAL;
 using Xunit;
 
 namespace PersonalFiles.Tests
@@ -8,29 +8,25 @@ namespace PersonalFiles.Tests
     public class PersonRepositoryTest
     {
         private const string _connectionString = "Server=(localdb)\\mssqllocaldb;Database=PersonalFiles;Trusted_Connection=true;MultipleActiveResultSets=true";
-        
-        private ApplicationUser User { get; set; }
 
-        public PersonRepositoryTest()
+        [Fact]
+        public async System.Threading.Tasks.Task AddNewPersonAsync()
         {
-            User = new ApplicationUser
+            // Arrange
+            var mock = new Mock<IConfiguration>();
+            mock.Setup(m => m.GetConnectionString("DefaultConnection")).Returns(_connectionString);
+            var userRepository = new UserStore(mock.Object);
+            var user = new ApplicationUser
             {
                 Email = "test@mail.ru",
                 IsDeleted = false,
-                PasswordHash = Encoding.ASCII.GetBytes("kekman").ToString(),
+                PasswordHash = SecurePasswordHasher.Hash("kekman"),
                 PhoneNumber = "88005553535",
                 UserName = "testman"
             };
-        }
 
-        [Fact]
-        public void AddNewPerson()
-        {
-            // Arrange
-            var userRepository = new UserStore(_connectionString);
-
+            var userResponse = await userRepository.CreateAsync(user, new System.Threading.CancellationToken());
             var personRepository = new PersonRepository(_connectionString);
-            var userResponse = userRepository.CreateAsync(User, new System.Threading.CancellationToken());
             var person = new Person
             {
                 Id = userRepository.ReturnLastUser().Id,
@@ -50,13 +46,23 @@ namespace PersonalFiles.Tests
         }
 
         [Fact]
-        public void UpdatePerson()
+        public async System.Threading.Tasks.Task UpdatePersonAsync()
         {
             // Arrange
-            var userRepository = new UserStore(_connectionString);
+            var mock = new Mock<IConfiguration>();
+            mock.Setup(m => m.GetConnectionString("DefaultConnection")).Returns(_connectionString);
+            var userRepository = new UserStore(mock.Object);
             var repository = new PersonRepository(_connectionString);
+            var user = new ApplicationUser
+            {
+                Email = "test@mail.ru",
+                IsDeleted = false,
+                PasswordHash = SecurePasswordHasher.Hash("kekman"),
+                PhoneNumber = "88005553535",
+                UserName = "testman"
+            };
 
-            var userResponse = userRepository.CreateAsync(User, new System.Threading.CancellationToken());
+            var userResponse = await userRepository.CreateAsync(user, new System.Threading.CancellationToken());
             var person = new Person
             {
                 Id = userRepository.ReturnLastUser().Id,

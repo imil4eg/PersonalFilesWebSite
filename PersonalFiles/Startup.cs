@@ -33,6 +33,9 @@ namespace PersonalFiles
             services.AddTransient<IRoleStore<ApplicationRole>, RoleStore>();
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddUserManager<UserManager<ApplicationUser>>()
+                .AddRoleManager<RoleManager<ApplicationRole>>()
+                .AddSignInManager<SignInManager<ApplicationUser>>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

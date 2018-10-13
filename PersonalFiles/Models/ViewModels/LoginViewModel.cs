@@ -8,7 +8,7 @@ namespace PersonalFiles.Models
         /// Users login
         /// </summary>
         [DisplayName("Имя пользователя")]
-        public string Login { get; set; }
+        public string UserName { get; set; }
 
         /// <summary>
         /// Users password

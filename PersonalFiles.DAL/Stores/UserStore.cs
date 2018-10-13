@@ -1,132 +1,129 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Dapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace PersonalFiles.DAL
 {
-    public class UserStore : IUserStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>
+    public class UserStore : IUserStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>, IUserRoleStore<ApplicationUser>
     {
         private readonly string _connectionString;
 
-        public UserStore(string connectionString)
+        private readonly RoleStore _rolesTable;
+        private readonly UserRoleRepository _userRoles;
+
+        public UserStore(IConfiguration configuration)
         {
-            _connectionString = connectionString;
+            _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _rolesTable = new RoleStore(configuration);
+            _userRoles = new UserRoleRepository(_connectionString);
         }
 
+        /// <summary>
+        /// Create user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<IdentityResult> CreateAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
-            //  cancellationToken.ThrowIfCancellationRequested();
+            cancellationToken.ThrowIfCancellationRequested();
 
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
-                connection.Open();
-
-                using(SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = $@"INSERT INTO [ApplicationUser] ([UserName], [Email], [PasswordHash], [IsDeleted]) " +
-                        $"VALUES (@param1, @param2, @param3, " +
-                        $"@param4)";
-
-                    cmd.Parameters.Add("@param1", SqlDbType.NVarChar).Value = user.UserName;
-                    cmd.Parameters.Add("@param2", SqlDbType.NVarChar).Value = user.Email;
-                    cmd.Parameters.Add("@param3", SqlDbType.NVarChar).Value = Encoding.ASCII.GetBytes(user.PasswordHash).ToString();
-                    cmd.Parameters.Add("@param4", SqlDbType.Bit).Value = user.IsDeleted;
-
-                    cmd.ExecuteNonQuery();
-                }
+                await connection.OpenAsync(cancellationToken);
+                user.Id = await connection.QuerySingleAsync<int>("INSERT INTO [ApplicationUser] ([UserName], [Email], [PasswordHash], [IsDeleted])" +
+                    $"VALUES (@{nameof(ApplicationUser.UserName)}, @{nameof(ApplicationUser.Email)}," +
+                    $" @{nameof(ApplicationUser.PasswordHash)}, @{nameof(ApplicationUser.IsDeleted)});" +
+                    $"SELECT CAST (SCOPE_IDENTITY() as int)", user);
             }
 
             return IdentityResult.Success;
         }
 
+        /// <summary>
+        /// Return last user (for tests)
+        /// </summary>
+        /// <returns></returns>
         public ApplicationUser ReturnLastUser()
         {
-             List<ApplicationUser> users = new List<ApplicationUser>();
-
             using(var con = new SqlConnection(_connectionString))
             {
                 con.Open();
-                
-                using(var cmd = new SqlCommand())
-                {
-                    cmd.Connection = con;
-                    cmd.CommandText = "SELECT * FROM [ApplicationUser]";
-                    SqlDataReader reader = cmd.ExecuteReader();
 
-                    while (reader.Read())
-
-                        users.Add(new ApplicationUser
-                        {
-                            Id = reader.GetValue<int>(0),
-                            UserName = reader.GetValue<string>(1),
-                            Email = reader.GetValue<string>(2),
-                            PasswordHash = reader.GetValue<string>(3),
-                            PhoneNumber = reader.GetValue<string>(4),
-                            IsDeleted = reader.GetValue<bool>(5)
-                        });
-                }
+                return con.QuerySingleOrDefault<ApplicationUser>($@"SELECT TOP 1 * FROM [ApplicationUser]
+                        ORDER BY [Id] DESC");
             }
-
-            return users[users.Count - 1];
         }
 
+        /// <summary>
+        /// Delete user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<IdentityResult> DeleteAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             using(SqlConnection con = new SqlConnection(_connectionString))
             {
-                con.Open();
+                await con.OpenAsync(cancellationToken);
 
-                using(SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandText = $"UPDATE [ApplicationUser] SET IsDeleted = 1";
-                    cmd.ExecuteNonQuery();
-                }
+                await con.ExecuteAsync($@"UPDATE [ApplicationUser] SET [IsDeleted] = @{nameof(ApplicationUser.IsDeleted)}
+                                        WHERE [Id] = @{nameof(ApplicationUser.Id)}", user);
             }
 
             return IdentityResult.Success;
         }
 
+        /// <summary>
+        /// Dispose (nothing to dispose)
+        /// </summary>
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Find user by id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<ApplicationUser> FindByIdAsync(string userId, CancellationToken cancellationToken)
         {
-            ApplicationUser user;
+            cancellationToken.ThrowIfCancellationRequested();
 
             using(var con = new SqlConnection(_connectionString))
             {
-                con.Open();
-
-                using(var cmd = new SqlCommand())
-                {
-                    cmd.CommandText = $@"SELECT * FROM [ApplicationUser] WHERE [Id] = {userId}";
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    
-                    user = new ApplicationUser
-                    {
-                        Id = reader.GetValue<int>(0),
-                        UserName = reader.GetValue<string>(1),
-                        Email = reader.GetValue<string>(2),
-                        PasswordHash = reader.GetValue<string>(3),
-                        PhoneNumber = reader.GetValue<string>(4),
-                        IsDeleted = reader.GetValue<bool>(5)
-                    };
-                }
+                await con.OpenAsync(cancellationToken);
+                return await con.QuerySingleOrDefaultAsync<ApplicationUser>($@"SELECT * FROM [ApplicationUser]
+                                    WHERE [Id] = @{nameof(userId)}", new { userId });
             }
-
-            return user;
         }
 
-        public Task<ApplicationUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
+        /// <summary>
+        /// Find user by name
+        /// </summary>
+        /// <param name="normalizedUserName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<ApplicationUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            cancellationToken.ThrowIfCancellationRequested();
+
+            using(SqlConnection con = new SqlConnection(_connectionString))
+            {
+                await con.OpenAsync(cancellationToken);
+                return await con.QuerySingleOrDefaultAsync<ApplicationUser>($@"SELECT * FROM [ApplicationUser]
+                                WHERE [UserName] = @{nameof(normalizedUserName)}", new { normalizedUserName });
+            }
         }
 
         public Task<string> GetNormalizedUserNameAsync(ApplicationUser user, CancellationToken cancellationToken)
@@ -134,21 +131,45 @@ namespace PersonalFiles.DAL
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Return hash password
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<string> GetPasswordHashAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
             return Task.FromResult(user.PasswordHash);
         }
 
+        /// <summary>
+        /// Get users id
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<string> GetUserIdAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult(user.Id.ToString());
         }
 
+        /// <summary>
+        /// Get users name
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<string> GetUserNameAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult(user.UserName);
         }
 
+        /// <summary>
+        /// Check if user has password
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<bool> HasPasswordAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
             return Task.FromResult(user.PasswordHash != null);
@@ -159,38 +180,122 @@ namespace PersonalFiles.DAL
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Set user password
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="passwordHash"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task SetPasswordHashAsync(ApplicationUser user, string passwordHash, CancellationToken cancellationToken)
         {
             user.PasswordHash = passwordHash;
             return Task.FromResult(user.PasswordHash);
         }
 
+        /// <summary>
+        /// SEt users name
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="userName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task SetUserNameAsync(ApplicationUser user, string userName, CancellationToken cancellationToken)
         {
             user.UserName = userName;
             return Task.FromResult(user.UserName);
         }
 
+        /// <summary>
+        /// Update user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<IdentityResult> UpdateAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             using(var con = new SqlConnection(_connectionString))
             {
-                con.Open();
-
-                using(var cmd = new SqlCommand())
-                {
-                    cmd.CommandText = string.Format("UPDATE [ApplicationUser] SET" +
-                        $"[UserName] = {user.UserName}" +
-                        $"[Email] = { user.Email}" +
-                        $"[PasswordHash] = {user.PasswordHash}" +
-                        $"[PhoneNumber] = {user.PhoneNumber}" +
-                        $"[IsDeleted] = {user.IsDeleted}");
-
-                    cmd.ExecuteNonQuery();
-                }
+                await con.OpenAsync(cancellationToken);
+                await con.ExecuteAsync($@"UPDATE [ApplicationUser] SET
+                    [UserName] = @{nameof(ApplicationUser.UserName)}, [Email] = @{nameof(ApplicationUser.Email)},
+                    [PasswordHash] = @{nameof(ApplicationUser.PasswordHash)}, [PhoneNumber] = @{nameof(ApplicationUser.PhoneNumber)},
+                    [Isdeleted] = @{nameof(ApplicationUser.IsDeleted)}", user);
             }
 
             return IdentityResult.Success;
+        }
+
+        /// <summary>
+        /// Add role to user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="roleName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task AddToRoleAsync(ApplicationUser user, string roleName, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if(user == null)
+            {
+                throw new NullReferenceException("user is null");
+            }
+
+            if(roleName == null)
+            {
+                throw new NullReferenceException("role name is null");
+            }
+
+            var role = await _rolesTable.FindByNameAsync(roleName, cancellationToken);
+
+            if(role == null)
+            {
+                return;
+            }
+
+            if(await IsInRoleAsync(user, roleName, cancellationToken))
+            {
+                return;
+            }
+
+            _userRoles.Create(new UserRole {
+                UserId = user.Id,
+                RoleId = role.Id
+            });
+        }
+
+        public async Task RemoveFromRoleAsync(ApplicationUser user, string roleName, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var role = await _rolesTable.FindByNameAsync(roleName, cancellationToken);
+            var userRoles = await _userRoles.GetRolesAsync(user);
+
+            if(role != null)
+            {
+                _userRoles.Delete(userRoles.SingleOrDefault(r => r.RoleId == role.Id).Id);
+            }
+        }
+
+        public Task<IList<string>> GetRolesAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<bool> IsInRoleAsync(ApplicationUser user, string roleName, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var userRoles = await _userRoles.GetRolesAsync(user);
+            var role = await _rolesTable.FindByNameAsync(roleName, cancellationToken);
+
+            return userRoles.Any(ur => ur.RoleId == role.Id);
+        }
+
+        public Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

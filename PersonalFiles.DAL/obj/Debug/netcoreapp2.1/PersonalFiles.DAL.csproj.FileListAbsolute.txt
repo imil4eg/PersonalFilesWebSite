@@ -5,12 +5,10 @@ C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\bin\Debug\netcor
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\bin\Debug\netcoreapp2.1\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\bin\Debug\netcoreapp2.1\Microsoft.Extensions.Configuration.dll
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\bin\Debug\netcoreapp2.1\Microsoft.Extensions.Identity.Core.dll
-C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\bin\Debug\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.xml
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\bin\Debug\netcoreapp2.1\Microsoft.Extensions.Configuration.xml
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\bin\Debug\netcoreapp2.1\Microsoft.Extensions.Configuration.Abstractions.xml
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\bin\Debug\netcoreapp2.1\Microsoft.Extensions.Identity.Core.xml
-C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\bin\Debug\netcoreapp2.1\System.Data.SqlClient.xml
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\obj\Debug\netcoreapp2.1\PersonalFiles.DAL.csprojAssemblyReference.cache
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\obj\Debug\netcoreapp2.1\PersonalFiles.DAL.csproj.CoreCompileInputs.cache
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.DAL\obj\Debug\netcoreapp2.1\PersonalFiles.DAL.AssemblyInfoInputs.cache
