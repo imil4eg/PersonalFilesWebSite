@@ -6,29 +6,21 @@
 
         public UnitOfWork(string connectionString)
         {
-            this.connectionString = connectionString; 
-        }
-
-        public UnitOfWork()
-        {
+            this.connectionString = connectionString;
             Persons = new PersonRepository(connectionString);
             Educations = new EducationRepository(connectionString);
-            Authobiographys = new AutobiographyRepository(connectionString);
             Insurances = new InsuranceRepository(connectionString);
-            MilitaryIDs = new MilitaryIdRepository(connectionString);
             Passports = new PassportRepository(connectionString);
-            WorkBooks = new WorkBookRepository(connectionString);
-            WorkContacts = new WorkContactRepository(connectionString);
+            PersonsPositions = new PersonPositionRepository(connectionString);
+            Positions = new PositionRepository(connectionString);
         }
 
         public IPersonRepository Persons { get; private set; }
         public IEducationRepository Educations { get; private set; }
-        public IAutobiographyRepository Authobiographys { get; private set; }
         public IInsurancePolicyRepository Insurances { get; private set; }
-        public IMilitaryIdRepository MilitaryIDs { get; private set; }
         public IPassportRepository Passports { get; private set; }
-        public IWorkBookRepository WorkBooks { get; private set; }
-        public IWorkContactRepository WorkContacts { get; private set; }
+        public IPersonPositionRepository PersonsPositions { get; private set; }
+        public IPositionRepository Positions { get; private set; }
 
         public void Dispose()
         {

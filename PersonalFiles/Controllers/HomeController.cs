@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using PersonalFiles.Models;
 
@@ -10,14 +8,15 @@ namespace PersonalFiles.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            LoginViewModel model = new LoginViewModel();
+            return Redirect("~/Views/Authorization/Login.cshtml");
         }
 
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
 
-            return View("~/Views/Security/Login.cshtml");
+            return View("~/Views/Authorization/Login.cshtml");
         }
 
         public IActionResult Contact()

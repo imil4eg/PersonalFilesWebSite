@@ -35,3 +35,6 @@ C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles\obj\Debug\netcoreapp
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles\obj\Debug\netcoreapp2.1\PersonalFiles.pdb
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles\obj\Debug\netcoreapp2.1\Razor\Views\Authorization\Login.g.cshtml.cs
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles\obj\Debug\netcoreapp2.1\Razor\Views\Authorization\Register.g.cshtml.cs
+C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles\bin\Debug\netcoreapp2.1\PersonalFiles.BLL.dll
+C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles\bin\Debug\netcoreapp2.1\PersonalFiles.BLL.pdb
+C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles\obj\Debug\netcoreapp2.1\Razor\Views\Person\Persons.g.cshtml.cs

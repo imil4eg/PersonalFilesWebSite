@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 
 using Dapper;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace PersonalFiles.DAL
 {
@@ -155,7 +157,7 @@ namespace PersonalFiles.DAL
 
         public Task SetNormalizedRoleNameAsync(ApplicationRole role, string normalizedName, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult(role.Name);
         }
 
         public Task SetRoleNameAsync(ApplicationRole role, string roleName, CancellationToken cancellationToken)
@@ -171,10 +173,20 @@ namespace PersonalFiles.DAL
             using (var con = new SqlConnection(_connectionString))
             {
                 await con.OpenAsync(cancellationToken);
-                await con.ExecuteAsync($@"UPDATE [ApplicationRole] SET [Name] = @{nameof(ApplicationRole.Name)}", role);
+                await con.ExecuteAsync($@"UPDATE [ApplicationRole] SET [Name] = @{nameof(ApplicationRole.Name)}
+                                        WHERE [Id] = @{nameof(ApplicationRole.Id)}", role);
             }
 
             return IdentityResult.Success;
+        }
+
+        public IEnumerable<ApplicationRole> GetRolesByIds(IEnumerable<int> ids)
+        {
+            using(var con = new SqlConnection(_connectionString))
+            {
+                con.Open();
+                return con.Query<ApplicationRole>($@"SELECT [Name] FROM [ApplicationRole] WHERE [Id] IN @ids", new { ids });
+            }
         }
 
         #endregion

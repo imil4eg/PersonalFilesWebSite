@@ -10,19 +10,28 @@ using Microsoft.Extensions.Configuration;
 
 namespace PersonalFiles.DAL
 {
-    public class UserStore : IUserStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>, IUserRoleStore<ApplicationUser>
+    public class UserStore : IQueryableUserStore<ApplicationUser>,
+                                IUserStore<ApplicationUser>,
+                                IUserPasswordStore<ApplicationUser>,
+                                IUserRoleStore<ApplicationUser>,
+                                IUserTwoFactorStore<ApplicationUser>
     {
         private readonly string _connectionString;
 
         private readonly RoleStore _rolesTable;
         private readonly UserRoleRepository _userRoles;
+        private readonly IUserRepository _userRepository;
 
         public UserStore(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
             _rolesTable = new RoleStore(configuration);
             _userRoles = new UserRoleRepository(_connectionString);
+            _userRepository = new UserRepository(_connectionString);
         }
+
+
+        public IQueryable<ApplicationUser> Users => Task.Run(() => _userRepository.GetAll()).Result.AsQueryable();
 
         /// <summary>
         /// Create user
@@ -34,13 +43,20 @@ namespace PersonalFiles.DAL
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            using(SqlConnection connection = new SqlConnection(_connectionString))
+            try
             {
-                await connection.OpenAsync(cancellationToken);
-                user.Id = await connection.QuerySingleAsync<int>("INSERT INTO [ApplicationUser] ([UserName], [Email], [PasswordHash], [IsDeleted])" +
-                    $"VALUES (@{nameof(ApplicationUser.UserName)}, @{nameof(ApplicationUser.Email)}," +
-                    $" @{nameof(ApplicationUser.PasswordHash)}, @{nameof(ApplicationUser.IsDeleted)});" +
-                    $"SELECT CAST (SCOPE_IDENTITY() as int)", user);
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    await connection.OpenAsync(cancellationToken);
+                    user.Id = await connection.QuerySingleAsync<int>("INSERT INTO [ApplicationUser] ([UserName], [Email], [PasswordHash], [IsDeleted])" +
+                        $"VALUES (@{nameof(ApplicationUser.UserName)}, @{nameof(ApplicationUser.NormalizedUserName)}, @{nameof(ApplicationUser.Email)}," +
+                        $" @{nameof(ApplicationUser.PasswordHash)}, @{nameof(ApplicationUser.IsDeleted)});" +
+                        $"SELECT CAST (SCOPE_IDENTITY() as int)", user);
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
 
             return IdentityResult.Success;
@@ -122,13 +138,13 @@ namespace PersonalFiles.DAL
             {
                 await con.OpenAsync(cancellationToken);
                 return await con.QuerySingleOrDefaultAsync<ApplicationUser>($@"SELECT * FROM [ApplicationUser]
-                                WHERE [UserName] = @{nameof(normalizedUserName)}", new { normalizedUserName });
+                                WHERE [NormalizedUserName] = @{nameof(normalizedUserName)}", new { normalizedUserName });
             }
         }
 
         public Task<string> GetNormalizedUserNameAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult(user.NormalizedUserName);
         }
 
         /// <summary>
@@ -177,7 +193,8 @@ namespace PersonalFiles.DAL
 
         public Task SetNormalizedUserNameAsync(ApplicationUser user, string normalizedName, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            user.NormalizedUserName = normalizedName;
+            return Task.FromResult(user.NormalizedUserName);
         }
 
         /// <summary>
@@ -220,9 +237,10 @@ namespace PersonalFiles.DAL
             {
                 await con.OpenAsync(cancellationToken);
                 await con.ExecuteAsync($@"UPDATE [ApplicationUser] SET
-                    [UserName] = @{nameof(ApplicationUser.UserName)}, [Email] = @{nameof(ApplicationUser.Email)},
+                    [UserName] = @{nameof(ApplicationUser.UserName)}, [NormalizedUserName] = @{nameof(ApplicationUser.NormalizedUserName)}, [Email] = @{nameof(ApplicationUser.Email)},
                     [PasswordHash] = @{nameof(ApplicationUser.PasswordHash)}, [PhoneNumber] = @{nameof(ApplicationUser.PhoneNumber)},
-                    [Isdeleted] = @{nameof(ApplicationUser.IsDeleted)}", user);
+                    [IsDeleted] = @{nameof(ApplicationUser.IsDeleted)}
+                    WHERE [Id] = @{nameof(ApplicationUser.Id)}", user);
             }
 
             return IdentityResult.Success;
@@ -279,9 +297,10 @@ namespace PersonalFiles.DAL
             }
         }
 
-        public Task<IList<string>> GetRolesAsync(ApplicationUser user, CancellationToken cancellationToken)
+        public async Task<IList<string>> GetRolesAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            IEnumerable<int> rolesIds = (await _userRoles.GetRolesAsync(user)).Select(ur => ur.RoleId);
+            return _rolesTable.GetRolesByIds(rolesIds).Select(r => r.Name).ToList();
         }
 
         public async Task<bool> IsInRoleAsync(ApplicationUser user, string roleName, CancellationToken cancellationToken)
@@ -296,6 +315,16 @@ namespace PersonalFiles.DAL
         public Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
         {
             throw new System.NotImplementedException();
+        }
+
+        public Task SetTwoFactorEnabledAsync(ApplicationUser user, bool enabled, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> GetTwoFactorEnabledAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(false);
         }
     }
 }

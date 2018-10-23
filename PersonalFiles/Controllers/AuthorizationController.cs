@@ -3,17 +3,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PersonalFiles.DAL;
 using PersonalFiles.Models;
+using PersonalFiles.BLL;
 
 namespace PersonalFiles.Controllers
 {
     public class AuthorizationController : Controller
     {
         #region Fields
-
-        /// <summary>
-        /// Database access
-        /// </summary>
-        protected IUnitOfWork _unitOfWork;
 
         /// <summary>
         /// The manager for handling user creation, deletion, searcing, roles
@@ -25,6 +21,8 @@ namespace PersonalFiles.Controllers
         /// </summary>
         protected SignInManager<ApplicationUser> _signInManager;
 
+        protected IPersonService _personService;
+
         #endregion
 
         /// <summary>
@@ -33,18 +31,18 @@ namespace PersonalFiles.Controllers
         /// <param name="unitOfWork"></param>
         /// <param name="userManager"></param>
         /// <param name="signInManager"></param>
-        public AuthorizationController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AuthorizationController(IPersonService personService, UserManager<ApplicationUser> userManager,
+                                        SignInManager<ApplicationUser> signInManager)
         {
-            this._unitOfWork = unitOfWork;
             this._userManager = userManager;
             this._signInManager = signInManager;
+            this._personService = personService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+        /// <summary>
+        /// Login get method
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Login()
         {
@@ -52,9 +50,15 @@ namespace PersonalFiles.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Login post method
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<IActionResult> LoginAsync(LoginViewModel model)
+        public async System.Threading.Tasks.Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -68,10 +72,11 @@ namespace PersonalFiles.Controllers
                 return View(model);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
+            //var res = _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Persons", "Person");
             }
             else
             {
@@ -80,6 +85,10 @@ namespace PersonalFiles.Controllers
             }
         }
 
+        /// <summary>
+        /// Register get method
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Register()
         {
@@ -87,17 +96,22 @@ namespace PersonalFiles.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Register post method
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<IActionResult> RegisterAsync(RegisterViewModel model)
+        public async System.Threading.Tasks.Task<IActionResult> Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var user = await _userManager.FindByNameAsync(model.Login);
+            var user = await _userManager.FindByNameAsync(model.UserName);
             if(user != null)
             {
                 ModelState.AddModelError("", "Подобный логин уже используется");
@@ -107,14 +121,14 @@ namespace PersonalFiles.Controllers
             var result = await _userManager.CreateAsync(new ApplicationUser
             {
                 Email = model.Email,
-                UserName = model.Login,
+                UserName = model.UserName,
                 PhoneNumber = model.Phone,
                 IsDeleted = false
             }, model.Password);
 
             if (result.Succeeded)
             {
-                user = await _userManager.FindByNameAsync(model.Login);
+                user = await _userManager.FindByNameAsync(model.UserName);
             }
 
             return null;

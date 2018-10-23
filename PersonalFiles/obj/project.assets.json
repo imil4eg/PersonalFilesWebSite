@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.1": {
+      "AutoMapper/7.0.1": {
+        "type": "package",
+        "dependencies": {
+          "System.ValueTuple": "4.5.0"
+        },
+        "compile": {
+          "lib/netcoreapp2.0/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/AutoMapper.dll": {}
+        }
+      },
       "Dapper/1.50.5": {
         "type": "package",
         "dependencies": {
@@ -3247,6 +3259,18 @@
           "lib/netstandard1.0/System.Composition.TypedParts.dll": {}
         }
       },
+      "System.Configuration.ConfigurationManager/4.4.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Security.Cryptography.ProtectedData": "4.4.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
+        }
+      },
       "System.Console/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4236,6 +4260,21 @@
           "lib/netstandard1.3/System.Security.Cryptography.Primitives.dll": {}
         }
       },
+      "System.Security.Cryptography.ProtectedData/4.4.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "System.Security.Cryptography.X509Certificates/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4474,18 +4513,13 @@
           "lib/netstandard1.3/System.Threading.Thread.dll": {}
         }
       },
-      "System.ValueTuple/4.3.0": {
+      "System.ValueTuple/4.5.0": {
         "type": "package",
-        "dependencies": {
-          "System.Collections": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
         "compile": {
-          "lib/netstandard1.0/System.ValueTuple.dll": {}
+          "ref/netcoreapp2.0/_._": {}
         },
         "runtime": {
-          "lib/netstandard1.0/System.ValueTuple.dll": {}
+          "lib/netcoreapp2.0/_._": {}
         }
       },
       "System.Xml.ReaderWriter/4.3.0": {
@@ -4626,6 +4660,47 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "Unity/5.8.11": {
+        "type": "package",
+        "dependencies": {
+          "System.Configuration.ConfigurationManager": "4.4.1",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netcoreapp2.0/CommonServiceLocator.dll": {},
+          "lib/netcoreapp2.0/Unity.Abstractions.dll": {},
+          "lib/netcoreapp2.0/Unity.Configuration.dll": {},
+          "lib/netcoreapp2.0/Unity.Container.dll": {},
+          "lib/netcoreapp2.0/Unity.Interception.Configuration.dll": {},
+          "lib/netcoreapp2.0/Unity.Interception.dll": {},
+          "lib/netcoreapp2.0/Unity.RegistrationByConvention.dll": {},
+          "lib/netcoreapp2.0/Unity.ServiceLocation.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/CommonServiceLocator.dll": {},
+          "lib/netcoreapp2.0/Unity.Abstractions.dll": {},
+          "lib/netcoreapp2.0/Unity.Configuration.dll": {},
+          "lib/netcoreapp2.0/Unity.Container.dll": {},
+          "lib/netcoreapp2.0/Unity.Interception.Configuration.dll": {},
+          "lib/netcoreapp2.0/Unity.Interception.dll": {},
+          "lib/netcoreapp2.0/Unity.RegistrationByConvention.dll": {},
+          "lib/netcoreapp2.0/Unity.ServiceLocation.dll": {}
+        }
+      },
+      "PersonalFiles.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "PersonalFiles.DAL": "1.0.0",
+          "Unity": "5.8.11"
+        },
+        "compile": {
+          "bin/placeholder/PersonalFiles.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PersonalFiles.BLL.dll": {}
+        }
+      },
       "PersonalFiles.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
@@ -4642,6 +4717,28 @@
     }
   },
   "libraries": {
+    "AutoMapper/7.0.1": {
+      "sha512": "1qKMJ1WPs42VkgeQ5iXRDWf46+iUqYM/yColAvAeDQhUgQNsgzSxjMDHQc7dL2x/o0JY8TwG+obR7vbvgh+Y3g==",
+      "type": "package",
+      "path": "automapper/7.0.1",
+      "files": [
+        ".signature.p7s",
+        "automapper.7.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "lib/net45/AutoMapper.dll",
+        "lib/net45/AutoMapper.pdb",
+        "lib/net45/AutoMapper.xml",
+        "lib/netcoreapp2.0/AutoMapper.dll",
+        "lib/netcoreapp2.0/AutoMapper.pdb",
+        "lib/netcoreapp2.0/AutoMapper.xml",
+        "lib/netstandard1.3/AutoMapper.dll",
+        "lib/netstandard1.3/AutoMapper.pdb",
+        "lib/netstandard1.3/AutoMapper.xml",
+        "lib/netstandard2.0/AutoMapper.dll",
+        "lib/netstandard2.0/AutoMapper.pdb",
+        "lib/netstandard2.0/AutoMapper.xml"
+      ]
+    },
     "Dapper/1.50.5": {
       "sha512": "1vPpX7WQmQCIb7rwlGOUoVs/yWZhVKvdhuG7WrJV+V+qsP8btnrrCqVWHENAlJxBAnUw5rhWfmuba9/Egei9MA==",
       "type": "package",
@@ -8298,6 +8395,26 @@
         "system.composition.typedparts.nuspec"
       ]
     },
+    "System.Configuration.ConfigurationManager/4.4.1": {
+      "sha512": "LoSjM/kLDpyLyoGsmwS5oVMRzHf/0XHkRpr3QZu/HuAv6Sfk919usTMLqD9N9VK3S4Q2+bd3tKJ0ko4MYFfq4Q==",
+      "type": "package",
+      "path": "system.configuration.configurationmanager/4.4.1",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Configuration.ConfigurationManager.dll",
+        "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll",
+        "ref/net461/System.Configuration.ConfigurationManager.dll",
+        "ref/net461/System.Configuration.ConfigurationManager.xml",
+        "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll",
+        "ref/netstandard2.0/System.Configuration.ConfigurationManager.xml",
+        "system.configuration.configurationmanager.4.4.1.nupkg.sha512",
+        "system.configuration.configurationmanager.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Console/4.3.0": {
       "sha512": "DHDrIxiqk1h03m6khKWV2X8p/uvN79rgSqpilL6uzpmSfxfU5ng8VcPtW4qsDsQDHiTv6IPV9TmD5M/vElPNLg==",
       "type": "package",
@@ -11167,6 +11284,46 @@
         "system.security.cryptography.primitives.nuspec"
       ]
     },
+    "System.Security.Cryptography.ProtectedData/4.4.0": {
+      "sha512": "WwEexvBd+17yfY7fcS+fBGl+HADEfCJuKeDJqBT7D6j6vKwYvfLyGuq2y/MmrKORC6mbYwth7kjinO1mPhTL3g==",
+      "type": "package",
+      "path": "system.security.cryptography.protecteddata/4.4.0",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Security.Cryptography.ProtectedData.dll",
+        "lib/net461/System.Security.Cryptography.ProtectedData.dll",
+        "lib/netstandard1.3/System.Security.Cryptography.ProtectedData.dll",
+        "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/System.Security.Cryptography.ProtectedData.dll",
+        "ref/net461/System.Security.Cryptography.ProtectedData.dll",
+        "ref/net461/System.Security.Cryptography.ProtectedData.xml",
+        "ref/netstandard1.3/System.Security.Cryptography.ProtectedData.dll",
+        "ref/netstandard2.0/System.Security.Cryptography.ProtectedData.dll",
+        "ref/netstandard2.0/System.Security.Cryptography.ProtectedData.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/win/lib/net46/System.Security.Cryptography.ProtectedData.dll",
+        "runtimes/win/lib/net461/System.Security.Cryptography.ProtectedData.dll",
+        "runtimes/win/lib/netstandard1.3/System.Security.Cryptography.ProtectedData.dll",
+        "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll",
+        "system.security.cryptography.protecteddata.4.4.0.nupkg.sha512",
+        "system.security.cryptography.protecteddata.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Security.Cryptography.X509Certificates/4.3.0": {
       "sha512": "t2Tmu6Y2NtJ2um0RtcuhP7ZdNNxXEgUm2JeoA/0NvlMjAhKCnM1NX07TDl3244mVp3QU6LPEhT3HTtH1uF7IYw==",
       "type": "package",
@@ -11925,19 +12082,47 @@
         "system.threading.thread.nuspec"
       ]
     },
-    "System.ValueTuple/4.3.0": {
-      "sha512": "cNLEvBX3d6MMQRZe3SMFNukVbitDAEpVZO17qa0/2FHxZ7Y7PpFRpr6m2615XYM/tYYYf0B+WyHNujqIw8Luwg==",
+    "System.ValueTuple/4.5.0": {
+      "sha512": "xZtSZNEHGa+tGsKuP4sh257vxJ/yemShz4EusmomkynMzuEDDjVaErBNewpzEF6swUgbcrSQAX3ELsEp1zCOwA==",
       "type": "package",
-      "path": "system.valuetuple/4.3.0",
+      "path": "system.valuetuple/4.5.0",
       "files": [
-        "ThirdPartyNotices.txt",
-        "dotnet_library_license.txt",
-        "lib/netstandard1.0/.xml",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.ValueTuple.dll",
+        "lib/net461/System.ValueTuple.xml",
+        "lib/net47/System.ValueTuple.dll",
+        "lib/net47/System.ValueTuple.xml",
+        "lib/netcoreapp2.0/_._",
         "lib/netstandard1.0/System.ValueTuple.dll",
-        "lib/portable-net40+sl4+win8+wp8/.xml",
+        "lib/netstandard1.0/System.ValueTuple.xml",
+        "lib/netstandard2.0/_._",
         "lib/portable-net40+sl4+win8+wp8/System.ValueTuple.dll",
-        "system.valuetuple.4.3.0.nupkg.sha512",
-        "system.valuetuple.nuspec"
+        "lib/portable-net40+sl4+win8+wp8/System.ValueTuple.xml",
+        "lib/uap10.0.16299/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net461/System.ValueTuple.dll",
+        "ref/net47/System.ValueTuple.dll",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard2.0/_._",
+        "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll",
+        "ref/uap10.0.16299/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.valuetuple.4.5.0.nupkg.sha512",
+        "system.valuetuple.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Xml.ReaderWriter/4.3.0": {
@@ -12258,6 +12443,151 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "Unity/5.8.11": {
+      "sha512": "C9LCcDvwJBXDx/A3Tlc5AUGfEv9WWAk8ZL+OwK7vrS3tqImlRpw+sFNY4nyzkdPMyyuwpYG4Jov3PHvhFJyNdw==",
+      "type": "package",
+      "path": "unity/5.8.11",
+      "files": [
+        ".signature.p7s",
+        "lib/net40/CommonServiceLocator.dll",
+        "lib/net40/CommonServiceLocator.pdb",
+        "lib/net40/Unity.Abstractions.dll",
+        "lib/net40/Unity.Abstractions.pdb",
+        "lib/net40/Unity.Configuration.dll",
+        "lib/net40/Unity.Configuration.pdb",
+        "lib/net40/Unity.Container.dll",
+        "lib/net40/Unity.Container.pdb",
+        "lib/net40/Unity.ServiceLocation.dll",
+        "lib/net40/Unity.ServiceLocation.pdb",
+        "lib/net45/CommonServiceLocator.dll",
+        "lib/net45/CommonServiceLocator.pdb",
+        "lib/net45/Unity.Abstractions.dll",
+        "lib/net45/Unity.Abstractions.pdb",
+        "lib/net45/Unity.Configuration.dll",
+        "lib/net45/Unity.Configuration.pdb",
+        "lib/net45/Unity.Container.dll",
+        "lib/net45/Unity.Container.pdb",
+        "lib/net45/Unity.Interception.Configuration.dll",
+        "lib/net45/Unity.Interception.Configuration.pdb",
+        "lib/net45/Unity.Interception.dll",
+        "lib/net45/Unity.Interception.pdb",
+        "lib/net45/Unity.RegistrationByConvention.dll",
+        "lib/net45/Unity.RegistrationByConvention.pdb",
+        "lib/net45/Unity.ServiceLocation.dll",
+        "lib/net45/Unity.ServiceLocation.pdb",
+        "lib/net46/CommonServiceLocator.dll",
+        "lib/net46/CommonServiceLocator.pdb",
+        "lib/net46/Unity.Abstractions.dll",
+        "lib/net46/Unity.Abstractions.pdb",
+        "lib/net46/Unity.Configuration.dll",
+        "lib/net46/Unity.Configuration.pdb",
+        "lib/net46/Unity.Container.dll",
+        "lib/net46/Unity.Container.pdb",
+        "lib/net46/Unity.Interception.Configuration.dll",
+        "lib/net46/Unity.Interception.Configuration.pdb",
+        "lib/net46/Unity.Interception.dll",
+        "lib/net46/Unity.Interception.pdb",
+        "lib/net46/Unity.RegistrationByConvention.dll",
+        "lib/net46/Unity.RegistrationByConvention.pdb",
+        "lib/net46/Unity.ServiceLocation.dll",
+        "lib/net46/Unity.ServiceLocation.pdb",
+        "lib/net47/CommonServiceLocator.dll",
+        "lib/net47/CommonServiceLocator.pdb",
+        "lib/net47/Unity.Abstractions.dll",
+        "lib/net47/Unity.Abstractions.pdb",
+        "lib/net47/Unity.Configuration.dll",
+        "lib/net47/Unity.Configuration.pdb",
+        "lib/net47/Unity.Container.dll",
+        "lib/net47/Unity.Container.pdb",
+        "lib/net47/Unity.Interception.Configuration.dll",
+        "lib/net47/Unity.Interception.Configuration.pdb",
+        "lib/net47/Unity.Interception.dll",
+        "lib/net47/Unity.Interception.pdb",
+        "lib/net47/Unity.RegistrationByConvention.dll",
+        "lib/net47/Unity.RegistrationByConvention.pdb",
+        "lib/net47/Unity.ServiceLocation.dll",
+        "lib/net47/Unity.ServiceLocation.pdb",
+        "lib/netcoreapp1.0/CommonServiceLocator.deps.json",
+        "lib/netcoreapp1.0/CommonServiceLocator.dll",
+        "lib/netcoreapp1.0/CommonServiceLocator.pdb",
+        "lib/netcoreapp1.0/Unity.Abstractions.deps.json",
+        "lib/netcoreapp1.0/Unity.Abstractions.dll",
+        "lib/netcoreapp1.0/Unity.Abstractions.pdb",
+        "lib/netcoreapp1.0/Unity.Container.deps.json",
+        "lib/netcoreapp1.0/Unity.Container.dll",
+        "lib/netcoreapp1.0/Unity.Container.pdb",
+        "lib/netcoreapp1.0/Unity.ServiceLocation.deps.json",
+        "lib/netcoreapp1.0/Unity.ServiceLocation.dll",
+        "lib/netcoreapp1.0/Unity.ServiceLocation.pdb",
+        "lib/netcoreapp2.0/CommonServiceLocator.deps.json",
+        "lib/netcoreapp2.0/CommonServiceLocator.dll",
+        "lib/netcoreapp2.0/CommonServiceLocator.pdb",
+        "lib/netcoreapp2.0/Unity.Abstractions.deps.json",
+        "lib/netcoreapp2.0/Unity.Abstractions.dll",
+        "lib/netcoreapp2.0/Unity.Abstractions.pdb",
+        "lib/netcoreapp2.0/Unity.Configuration.deps.json",
+        "lib/netcoreapp2.0/Unity.Configuration.dll",
+        "lib/netcoreapp2.0/Unity.Configuration.pdb",
+        "lib/netcoreapp2.0/Unity.Container.deps.json",
+        "lib/netcoreapp2.0/Unity.Container.dll",
+        "lib/netcoreapp2.0/Unity.Container.pdb",
+        "lib/netcoreapp2.0/Unity.Interception.Configuration.deps.json",
+        "lib/netcoreapp2.0/Unity.Interception.Configuration.dll",
+        "lib/netcoreapp2.0/Unity.Interception.Configuration.pdb",
+        "lib/netcoreapp2.0/Unity.Interception.deps.json",
+        "lib/netcoreapp2.0/Unity.Interception.dll",
+        "lib/netcoreapp2.0/Unity.Interception.pdb",
+        "lib/netcoreapp2.0/Unity.RegistrationByConvention.deps.json",
+        "lib/netcoreapp2.0/Unity.RegistrationByConvention.dll",
+        "lib/netcoreapp2.0/Unity.RegistrationByConvention.pdb",
+        "lib/netcoreapp2.0/Unity.ServiceLocation.deps.json",
+        "lib/netcoreapp2.0/Unity.ServiceLocation.dll",
+        "lib/netcoreapp2.0/Unity.ServiceLocation.pdb",
+        "lib/netstandard1.0/CommonServiceLocator.deps.json",
+        "lib/netstandard1.0/CommonServiceLocator.dll",
+        "lib/netstandard1.0/CommonServiceLocator.pdb",
+        "lib/netstandard1.0/Unity.Abstractions.deps.json",
+        "lib/netstandard1.0/Unity.Abstractions.dll",
+        "lib/netstandard1.0/Unity.Abstractions.pdb",
+        "lib/netstandard1.0/Unity.Container.deps.json",
+        "lib/netstandard1.0/Unity.Container.dll",
+        "lib/netstandard1.0/Unity.Container.pdb",
+        "lib/netstandard1.0/Unity.ServiceLocation.deps.json",
+        "lib/netstandard1.0/Unity.ServiceLocation.dll",
+        "lib/netstandard1.0/Unity.ServiceLocation.pdb",
+        "lib/netstandard2.0/CommonServiceLocator.deps.json",
+        "lib/netstandard2.0/CommonServiceLocator.dll",
+        "lib/netstandard2.0/CommonServiceLocator.pdb",
+        "lib/netstandard2.0/Unity.Abstractions.deps.json",
+        "lib/netstandard2.0/Unity.Abstractions.dll",
+        "lib/netstandard2.0/Unity.Abstractions.pdb",
+        "lib/netstandard2.0/Unity.Configuration.deps.json",
+        "lib/netstandard2.0/Unity.Configuration.dll",
+        "lib/netstandard2.0/Unity.Configuration.pdb",
+        "lib/netstandard2.0/Unity.Container.deps.json",
+        "lib/netstandard2.0/Unity.Container.dll",
+        "lib/netstandard2.0/Unity.Container.pdb",
+        "lib/netstandard2.0/Unity.Interception.Configuration.deps.json",
+        "lib/netstandard2.0/Unity.Interception.Configuration.dll",
+        "lib/netstandard2.0/Unity.Interception.Configuration.pdb",
+        "lib/netstandard2.0/Unity.Interception.deps.json",
+        "lib/netstandard2.0/Unity.Interception.dll",
+        "lib/netstandard2.0/Unity.Interception.pdb",
+        "lib/netstandard2.0/Unity.RegistrationByConvention.deps.json",
+        "lib/netstandard2.0/Unity.RegistrationByConvention.dll",
+        "lib/netstandard2.0/Unity.RegistrationByConvention.pdb",
+        "lib/netstandard2.0/Unity.ServiceLocation.deps.json",
+        "lib/netstandard2.0/Unity.ServiceLocation.dll",
+        "lib/netstandard2.0/Unity.ServiceLocation.pdb",
+        "unity.5.8.11.nupkg.sha512",
+        "unity.nuspec"
+      ]
+    },
+    "PersonalFiles.BLL/1.0.0": {
+      "type": "project",
+      "path": "../PersonalFiles.BLL/PersonalFiles.BLL.csproj",
+      "msbuildProject": "../PersonalFiles.BLL/PersonalFiles.BLL.csproj"
+    },
     "PersonalFiles.DAL/1.0.0": {
       "type": "project",
       "path": "../PersonalFiles.DAL/PersonalFiles.DAL.csproj",
@@ -12266,10 +12596,11 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "AutoMapper >= 7.0.1",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.NETCore.App >= 2.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.1",
-      "PersonalFiles.DAL >= 1.0.0"
+      "PersonalFiles.BLL >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -12303,8 +12634,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\kudryavii\\source\\repos\\PersonalFiles\\PersonalFiles.DAL\\PersonalFiles.DAL.csproj": {
-              "projectPath": "C:\\Users\\kudryavii\\source\\repos\\PersonalFiles\\PersonalFiles.DAL\\PersonalFiles.DAL.csproj"
+            "C:\\Users\\kudryavii\\source\\repos\\PersonalFiles\\PersonalFiles.BLL\\PersonalFiles.BLL.csproj": {
+              "projectPath": "C:\\Users\\kudryavii\\source\\repos\\PersonalFiles\\PersonalFiles.BLL\\PersonalFiles.BLL.csproj"
             }
           }
         }
@@ -12318,6 +12649,10 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[7.0.1, )"
+          },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "f90ee580c57c09df573ac364de61b15c18e91e7d"
+    "signature": "211c3ce0f3bdb7e38d52286fde36cbddaf816adc"
   },
   "compilationOptions": {
     "defines": [
@@ -24,16 +24,31 @@
     ".NETCoreApp,Version=v2.1": {
       "PersonalFiles/1.0.0": {
         "dependencies": {
+          "AutoMapper": "7.0.1",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.NETCore.App": "2.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.1",
-          "PersonalFiles.DAL": "1.0.0"
+          "PersonalFiles.BLL": "1.0.0"
         },
         "runtime": {
           "PersonalFiles.dll": {}
         },
         "compile": {
           "PersonalFiles.dll": {}
+        }
+      },
+      "AutoMapper/7.0.1": {
+        "dependencies": {
+          "System.ValueTuple": "4.5.0"
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/AutoMapper.dll": {
+            "assemblyVersion": "7.0.1.0",
+            "fileVersion": "7.0.1.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp2.0/AutoMapper.dll": {}
         }
       },
       "Dapper/1.50.5": {
@@ -515,6 +530,20 @@
           "lib/netstandard1.0/System.Composition.TypedParts.dll": {}
         }
       },
+      "System.Configuration.ConfigurationManager/4.4.1": {
+        "dependencies": {
+          "System.Security.Cryptography.ProtectedData": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.6.25921.2"
+          }
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
+        }
+      },
       "System.Linq.Parallel/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -530,6 +559,85 @@
         }
       },
       "System.Reflection.TypeExtensions/4.4.0": {},
+      "System.Security.Cryptography.ProtectedData/4.4.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assemblyVersion": "4.0.2.0",
+            "fileVersion": "4.6.25519.3"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "4.0.2.0",
+            "fileVersion": "4.6.25519.3"
+          }
+        }
+      },
+      "System.ValueTuple/4.5.0": {},
+      "Unity/5.8.11": {
+        "dependencies": {
+          "System.Configuration.ConfigurationManager": "4.4.1",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/CommonServiceLocator.dll": {
+            "assemblyVersion": "2.0.4.0",
+            "fileVersion": "2.0.4.0"
+          },
+          "lib/netcoreapp2.0/Unity.Abstractions.dll": {
+            "assemblyVersion": "3.3.1.0",
+            "fileVersion": "3.3.1.0"
+          },
+          "lib/netcoreapp2.0/Unity.Configuration.dll": {
+            "assemblyVersion": "5.2.5.0",
+            "fileVersion": "5.2.5.0"
+          },
+          "lib/netcoreapp2.0/Unity.Container.dll": {
+            "assemblyVersion": "5.8.11.0",
+            "fileVersion": "5.8.11.0"
+          },
+          "lib/netcoreapp2.0/Unity.Interception.Configuration.dll": {
+            "assemblyVersion": "5.1.7.0",
+            "fileVersion": "5.1.7.0"
+          },
+          "lib/netcoreapp2.0/Unity.Interception.dll": {
+            "assemblyVersion": "5.5.5.0",
+            "fileVersion": "5.5.5.0"
+          },
+          "lib/netcoreapp2.0/Unity.RegistrationByConvention.dll": {
+            "assemblyVersion": "2.1.9.0",
+            "fileVersion": "2.1.9.0"
+          },
+          "lib/netcoreapp2.0/Unity.ServiceLocation.dll": {
+            "assemblyVersion": "2.1.2.0",
+            "fileVersion": "2.1.2.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp2.0/CommonServiceLocator.dll": {},
+          "lib/netcoreapp2.0/Unity.Abstractions.dll": {},
+          "lib/netcoreapp2.0/Unity.Configuration.dll": {},
+          "lib/netcoreapp2.0/Unity.Container.dll": {},
+          "lib/netcoreapp2.0/Unity.Interception.Configuration.dll": {},
+          "lib/netcoreapp2.0/Unity.Interception.dll": {},
+          "lib/netcoreapp2.0/Unity.RegistrationByConvention.dll": {},
+          "lib/netcoreapp2.0/Unity.ServiceLocation.dll": {}
+        }
+      },
+      "PersonalFiles.BLL/1.0.0": {
+        "dependencies": {
+          "PersonalFiles.DAL": "1.0.0",
+          "Unity": "5.8.11"
+        },
+        "runtime": {
+          "PersonalFiles.BLL.dll": {}
+        },
+        "compile": {
+          "PersonalFiles.BLL.dll": {}
+        }
+      },
       "PersonalFiles.DAL/1.0.0": {
         "dependencies": {
           "Dapper": "1.50.5"
@@ -1787,7 +1895,7 @@
           "System.Threading.Tasks": "4.3.0",
           "System.Threading.Tasks.Parallel": "4.3.0",
           "System.Threading.Thread": "4.3.0",
-          "System.ValueTuple": "4.3.0",
+          "System.ValueTuple": "4.5.0",
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XDocument": "4.3.0",
           "System.Xml.XPath.XDocument": "4.3.0",
@@ -3367,14 +3475,6 @@
         },
         "compileOnly": true
       },
-      "System.ValueTuple/4.3.0": {
-        "dependencies": {
-          "System.Collections": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
-        "compileOnly": true
-      },
       "System.Xml.ReaderWriter/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -3484,6 +3584,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/7.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1qKMJ1WPs42VkgeQ5iXRDWf46+iUqYM/yColAvAeDQhUgQNsgzSxjMDHQc7dL2x/o0JY8TwG+obR7vbvgh+Y3g==",
+      "path": "automapper/7.0.1",
+      "hashPath": "automapper.7.0.1.nupkg.sha512"
     },
     "Dapper/1.50.5": {
       "type": "package",
@@ -3660,6 +3767,13 @@
       "path": "system.composition.typedparts/1.0.31",
       "hashPath": "system.composition.typedparts.1.0.31.nupkg.sha512"
     },
+    "System.Configuration.ConfigurationManager/4.4.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LoSjM/kLDpyLyoGsmwS5oVMRzHf/0XHkRpr3QZu/HuAv6Sfk919usTMLqD9N9VK3S4Q2+bd3tKJ0ko4MYFfq4Q==",
+      "path": "system.configuration.configurationmanager/4.4.1",
+      "hashPath": "system.configuration.configurationmanager.4.4.1.nupkg.sha512"
+    },
     "System.Linq.Parallel/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -3673,6 +3787,32 @@
       "sha512": "sha512-JRxOAH6by+wn1gNnZc9jf2HbO/szhMJuLY2w44nEW77354WntXlFzWSVkx6280Uvcl3URZ/At+444vjX0/X1Aw==",
       "path": "system.reflection.typeextensions/4.4.0",
       "hashPath": "system.reflection.typeextensions.4.4.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.ProtectedData/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WwEexvBd+17yfY7fcS+fBGl+HADEfCJuKeDJqBT7D6j6vKwYvfLyGuq2y/MmrKORC6mbYwth7kjinO1mPhTL3g==",
+      "path": "system.security.cryptography.protecteddata/4.4.0",
+      "hashPath": "system.security.cryptography.protecteddata.4.4.0.nupkg.sha512"
+    },
+    "System.ValueTuple/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xZtSZNEHGa+tGsKuP4sh257vxJ/yemShz4EusmomkynMzuEDDjVaErBNewpzEF6swUgbcrSQAX3ELsEp1zCOwA==",
+      "path": "system.valuetuple/4.5.0",
+      "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
+    },
+    "Unity/5.8.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-C9LCcDvwJBXDx/A3Tlc5AUGfEv9WWAk8ZL+OwK7vrS3tqImlRpw+sFNY4nyzkdPMyyuwpYG4Jov3PHvhFJyNdw==",
+      "path": "unity/5.8.11",
+      "hashPath": "unity.5.8.11.nupkg.sha512"
+    },
+    "PersonalFiles.BLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "PersonalFiles.DAL/1.0.0": {
       "type": "project",
@@ -5512,13 +5652,6 @@
       "sha512": "sha512-OHmbT+Zz065NKII/ZHcH9XO1dEuLGI1L2k7uYss+9C1jLxTC9kTZZuzUOyXHayRk+dft9CiDf3I/QZ0t8JKyBQ==",
       "path": "system.threading.thread/4.3.0",
       "hashPath": "system.threading.thread.4.3.0.nupkg.sha512"
-    },
-    "System.ValueTuple/4.3.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-cNLEvBX3d6MMQRZe3SMFNukVbitDAEpVZO17qa0/2FHxZ7Y7PpFRpr6m2615XYM/tYYYf0B+WyHNujqIw8Luwg==",
-      "path": "system.valuetuple/4.3.0",
-      "hashPath": "system.valuetuple.4.3.0.nupkg.sha512"
     },
     "System.Xml.ReaderWriter/4.3.0": {
       "type": "package",

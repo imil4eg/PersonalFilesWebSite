@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFiles.DAL;
+using PersonalFiles.BLL;
+using AutoMapper;
 
 namespace PersonalFiles
 {
@@ -28,9 +30,26 @@ namespace PersonalFiles
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.Configure<PasswordHasherOptions>(options =>
+                options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV2
+            );
+
             services.AddTransient<IUserStore<ApplicationUser>, UserStore>();
             services.AddTransient<IRoleStore<ApplicationRole>, RoleStore>();
+
+            IUnitOfWork unitOfWork = new UnitOfWork(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddTransient<IPersonService, PersonService>(s => new PersonService(unitOfWork));
+            services.AddTransient<IEducationService, EducationService>(s => new EducationService(unitOfWork));
+            services.AddTransient<IPassportService, PassportService>(s => new PassportService(unitOfWork));
+            services.AddTransient<IPositionService, PositionService>(s => new PositionService(unitOfWork));
+            services.AddTransient<IPersonPositionService, IPersonPositionService>(s => new PersonPositionService(unitOfWork));
+
+            var mappingConfigurator = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mappingConfigurator.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddUserManager<UserManager<ApplicationUser>>()
@@ -62,8 +81,16 @@ namespace PersonalFiles
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Authorization}/{action=Login}/{id?}");
             });
+
+            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using(var scope = scopeFactory.CreateScope())
+            {
+                var roleService = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+                var userService = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                Seed.InitializeDataAsync(roleService, userService).Wait();
+            }
         }
     }
 }

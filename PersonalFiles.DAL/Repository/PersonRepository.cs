@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
 
@@ -77,15 +76,23 @@ namespace PersonalFiles.DAL
 
         public bool Update(Person item)
         {
-            using(SqlConnection con = new SqlConnection(_connectionString))
+            try
             {
-                con.Open();
-                con.Execute($@"UPDATE [Person] SET [LastName] = @{nameof(Person.LastName)}, 
-                    [FirstName] = @{nameof(Person.FirstName)}, [MiddleName] = @{nameof(Person.MiddleName)}, 
-                    [Gender] = @{nameof(Person.Gender)}, [SNILS] = @{nameof(Person.SNILS)}, [INN] = @{nameof(Person.INN)}", item);
-            }
+                using (SqlConnection con = new SqlConnection(_connectionString))
+                {
+                    con.Open();
+                    int rowsAffected = con.Execute($@"UPDATE [Person] SET [LastName] = @{nameof(Person.LastName)}, 
+                                    [FirstName] = @{nameof(Person.FirstName)}, [MiddleName] = @{nameof(Person.MiddleName)}, 
+                                    [Gender] = @{nameof(Person.Gender)}, [SNILS] = @{nameof(Person.SNILS)}, [INN] = @{nameof(Person.INN)}
+                                    WHERE [Id] = @{nameof(Person.Id)}", item);
 
-            return true;
+                    return rowsAffected > 0;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

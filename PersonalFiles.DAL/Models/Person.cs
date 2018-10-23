@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PersonalFiles.DAL
 {
@@ -27,6 +28,8 @@ namespace PersonalFiles.DAL
 
         [StringLength(13)]
         public string INN { get; set; }
+
+        public IEnumerable<byte> Image { get; set; }
     }
 
     public enum Gender
