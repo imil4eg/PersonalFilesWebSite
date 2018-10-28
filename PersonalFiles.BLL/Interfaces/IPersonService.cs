@@ -10,5 +10,7 @@ namespace PersonalFiles.BLL
         Person GetPersonById(int id);
         IEnumerable<Person> GetPersons();
         void UpdatePerson(Person person);
+        IEnumerable<Person> GetPersonsWithPosts();
+        Person GetPersonWithPosts(int id);
     }
 }

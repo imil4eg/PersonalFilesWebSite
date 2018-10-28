@@ -66,12 +66,6 @@ namespace PersonalFiles.Controllers
             }
 
             ApplicationUser user = await _userManager.FindByNameAsync(model.UserName);
-            if(user == null)
-            {
-                ViewBag.errorMessage = "Неверный логин или пароль";
-                return View(model);
-            }
-
             //var res = _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
             if (result.Succeeded)

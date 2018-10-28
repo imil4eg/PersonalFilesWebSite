@@ -1,5 +1,6 @@
 ﻿using PersonalFiles.DAL;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PersonalFiles.BLL
 {
@@ -77,7 +78,35 @@ namespace PersonalFiles.BLL
         {
             this._unitOfWork.Persons.Update(person);
         }
-        
+
+        public IEnumerable<Person> GetPersonsWithPosts()
+        {
+            var persons = this._unitOfWork.Persons.GetAll();
+
+            foreach(var person in persons)
+            {
+                var personPositions = this._unitOfWork.PersonsPositions.GetAll()
+                    .Where(pp => pp.PersonId == person.Id);
+                person.Posts = this._unitOfWork.Positions.GetAll()
+                    .Where(p => personPositions.Any(pp => pp.PositionId == p.Id))
+                    .Select(p => p.Name);
+            }
+
+            return persons;
+        }
+
+        public Person GetPersonWithPosts(int id)
+        {
+            var person = this._unitOfWork.Persons.Get(id);
+            var personPositions = this._unitOfWork.PersonsPositions.GetAll()
+                    .Where(pp => pp.PersonId == person.Id);
+            person.Posts = this._unitOfWork.Positions.GetAll()
+                .Where(p => personPositions.Any(pp => pp.PositionId == p.Id))
+                .Select(p => p.Name);
+
+            return person;
+        }
+
         #endregion
     }
 }

@@ -1,17 +1,10 @@
 ﻿@if (User.Identity.IsAuthenticated)
 {
-    @using(Html.BeginForm("LogOff", "Security", FormMethod.Post, new { id = "logoutForm", @class = "login_form" }))
-    {
-        @Html.AntiForgeryToken()
-
-        <ul class="login_form">
-            <li>
-                @Html.ActionLink(User.Identity.Name, "", "", routeValues: null, htmlAttributes: new { title = "Личный кабинет" })
-            </li>
-            <li>@Html.ActionLink("Личный кабинет", "Profile", "Profile")</li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
-        </ul>
-    }
+    <ul class="nav navbar-nav navbar-right">
+        <li><a>@User.Identity.Name</a></li>
+        <li><a asp-area="" asp-controller="Profile" asp-action="Profile">Личный кабинет</a></li>
+        <li><a asp-area="" asp-controller="" asp-action="">Выйти</a></li>
+    </ul>
 }
 @*else
 {

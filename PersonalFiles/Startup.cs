@@ -41,6 +41,7 @@ namespace PersonalFiles
             services.AddTransient<IPersonService, PersonService>(s => new PersonService(unitOfWork));
             services.AddTransient<IEducationService, EducationService>(s => new EducationService(unitOfWork));
             services.AddTransient<IPassportService, PassportService>(s => new PassportService(unitOfWork));
+            services.AddTransient<IInsuranceService, InsuranceService>(s => new InsuranceService(unitOfWork));
             services.AddTransient<IPositionService, PositionService>(s => new PositionService(unitOfWork));
             services.AddTransient<IPersonPositionService, IPersonPositionService>(s => new PersonPositionService(unitOfWork));
 
@@ -56,6 +57,12 @@ namespace PersonalFiles
                 .AddRoleManager<RoleManager<ApplicationRole>>()
                 .AddSignInManager<SignInManager<ApplicationUser>>()
                 .AddDefaultTokenProviders();
+
+            services.AddAuthentication()
+                .AddCookie(options => 
+                {
+                    options.LoginPath = "/Authorization/Login";
+                });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -73,6 +80,7 @@ namespace PersonalFiles
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -89,7 +97,14 @@ namespace PersonalFiles
             {
                 var roleService = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
                 var userService = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                Seed.InitializeDataAsync(roleService, userService).Wait();
+                var personService = scope.ServiceProvider.GetRequiredService<IPersonService>();
+                var positionService = scope.ServiceProvider.GetRequiredService<IPositionService>();
+                var personPositionService = scope.ServiceProvider.GetRequiredService<IPersonPositionService>();
+                var educationService = scope.ServiceProvider.GetRequiredService<IEducationService>();
+                var insuranceService = scope.ServiceProvider.GetRequiredService<IInsuranceService>();
+                var passportService = scope.ServiceProvider.GetRequiredService<IPassportService>();
+                Seed.InitializeDataAsync(roleService, userService, personService, 
+                    positionService, personPositionService, educationService, insuranceService, passportService).Wait();
             }
         }
     }

@@ -1,0 +1,188 @@
+﻿@model PersonViewModel
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container emp-profile">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-img">
+                <img src="~/images/avatar.png" alt="" />
+                <button class="file btn btn-lg btn-primary">
+                    Поменять фотографию
+                </button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="profile-head">
+                <h5>@string.Format("{0} {1}", Model.FirstName, Model.LastName)</h5>
+                <h6>@Model.Posts.Aggregate((i, j) => i + ", " + j)</h6>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Инофрмация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="passport-tab" data-toggle="tab" href="#passport" role="tab" aria-controls="passport" aria-selected="false">Паспорт</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="education-tab" data-toggle="tab" href="#education" role="tab" aria-controls="education" aria-selected="false">Образование</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance" role="tab" aria-controls="insurance" aria-selected="false">Страховка</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-2">
+            @Html.ActionLink("Изменить данные", "EditProfile", "Person", new { }, new { @class = "profile-edit-btn"})
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            <div class="tab-content profile-tab" id="myTabContent">
+                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.LastName)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.LastName</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.FirstName)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.FirstName</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.MiddleName)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.MiddleName</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Gender)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Gender</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.INN)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.INN</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.SNILS)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.SNILS</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.LastName)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.LastName</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="passport" role="tabpanel" aria-labelledby="passport-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Passport.Number)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Passport.Number</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Passport.Series)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Passport.Series</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Passport.GivenBy)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Passport.GivenBy</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Passport.DateOfGive)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Passport.DateOfGive</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Passport.Address)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Passport.Address</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="education" role="tabpanel" aria-labelledby="education-tab">
+                    @for (int i = 0; i < Model.Educations.Count(); i++)
+                    {
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Educations[i].File)
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.Educations[i].File</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Educations[i].EndDate)
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.Educations[i].EndDate</p>
+                            </div>
+                        </div>
+                    }
+                </div> 
+                <div class="tab-pane fade" id="insurance" role="tabpanel" aria-labelledby="insrance-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Insurance.Number)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Insurance.Number</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Insurance)
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Insurance.Company</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

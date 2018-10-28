@@ -9,6 +9,9 @@ namespace PersonalFiles
         public MappingProfile()
         {
             CreateMap<Person, PersonViewModel>();
+            CreateMap<InsurancePolicy, InsuranceViewModel>();
+            CreateMap<Education, EducationViewModel>();
+            CreateMap<Passport, PassportViewModel>();
         }
     }
 }

@@ -22,9 +22,9 @@ namespace PersonalFiles.DAL
                 using(SqlConnection con = new SqlConnection(_connectionString))
                 {
                     con.Open();
-                    return con.QuerySingleOrDefault<Passport>($@"INSET INTO [Passport] ([PersonId] [Number] [Series] [GivenBy] [DateOfGive] [Address])
+                    return con.QuerySingleOrDefault<Passport>($@"INSERT INTO [Passport] ([PersonId], [Number], [Series], [GivenBy], [DateOfGive], [Address])
                                 VALUES (@{nameof(Passport.PersonId)}, @{nameof(Passport.Number)}, @{nameof(Passport.Series)}, @{nameof(Passport.GivenBy)},
-                                @{nameof(Passport.DateOfGive)}, @{nameof(Passport.Address)}", item);
+                                @{nameof(Passport.DateOfGive)}, @{nameof(Passport.Address)})", item);
                 }
             }
             catch(Exception ex)

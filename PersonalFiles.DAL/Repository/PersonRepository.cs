@@ -21,10 +21,9 @@ namespace PersonalFiles.DAL
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-
-                connection.Execute($@"INSERT INTO [Person] ([Id], [LastName], [FirstName], 
+                connection.Execute($@"INSERT INTO [Person] ([LastName], [FirstName], 
                             [MiddleName], [Gender], [SNILS], [INN])
-                            VALUES (@{nameof(Person.Id)}, @{nameof(Person.LastName)}, @{nameof(Person.FirstName)}, 
+                            VALUES (@{nameof(Person.LastName)}, @{nameof(Person.FirstName)}, 
                             @{nameof(Person.MiddleName)}, @{nameof(Person.Gender)}, @{nameof(Person.SNILS)},
                             @{nameof(Person.INN)});", item);
             }
@@ -50,28 +49,20 @@ namespace PersonalFiles.DAL
 
         public Person Get(int id)
         {
-            Person person = new Person();
-
             using(SqlConnection con = new SqlConnection(_connectionString))
             {
                 con.Open();
-                con.QuerySingleOrDefault<Person>($@"SELECT * FROM [Person] WHERE [Id] = @{nameof(id)}", new { id });
+                return con.QuerySingleOrDefault<Person>($@"SELECT * FROM [Person] WHERE [Id] = @{nameof(id)}", new { id });
             }
-
-            return person;
         }
 
         public IEnumerable<Person> GetAll()
         {
-            List<Person> persons = new List<Person>();
-
             using(SqlConnection con = new SqlConnection(_connectionString))
             {
                 con.Open();
-                persons = con.Query<Person>("SELECT * FROM [Person]").AsList();
+                return con.Query<Person>("SELECT * FROM [Person]").AsList();
             }
-
-            return persons;
         }
 
         public bool Update(Person item)

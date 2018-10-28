@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PersonalFiles.DAL
 {
     public class Person
-    {
+    {    
         [Key]
         public int Id { get; set; }
 
@@ -29,7 +29,9 @@ namespace PersonalFiles.DAL
         [StringLength(13)]
         public string INN { get; set; }
 
-        public IEnumerable<byte> Image { get; set; }
+        //public IEnumerable<byte> Image { get; set; }
+
+        public IEnumerable<string> Posts { get; set; }
     }
 
     public enum Gender

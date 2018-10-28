@@ -1,4 +1,6 @@
-﻿namespace PersonalFiles.Models
+﻿using System.Collections.Generic;
+
+namespace PersonalFiles.Models
 {
     public sealed class PersonViewModel
     {
@@ -15,5 +17,13 @@
         public string SNILS { get; set; }
 
         public string INN { get; set; }
+
+        public IEnumerable<string> Posts { get; set; }
+
+        public PassportViewModel Passport { get; set; }
+
+        public IList<EducationViewModel> Educations { get; set; }
+
+        public InsuranceViewModel Insurance { get; set; }
     }
 }

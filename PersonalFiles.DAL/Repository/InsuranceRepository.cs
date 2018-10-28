@@ -22,7 +22,7 @@ namespace PersonalFiles.DAL
                 using(SqlConnection con = new SqlConnection(_connectionString))
                 {
                     con.Open();
-                    return con.QuerySingleOrDefault<InsurancePolicy>($@"INSERT INTO [InsurancePolicy] ([PersonId] [Number] [Company])
+                    return con.QuerySingleOrDefault<InsurancePolicy>($@"INSERT INTO [InsurancePolicy] ([PersonId], [Number], [Company])
                             VALUES (@{nameof(InsurancePolicy.PersonId)}, @{nameof(InsurancePolicy.Number)}, @{nameof(InsurancePolicy.Company)})", item);
                 }
             }
