@@ -74,7 +74,7 @@ using PersonalFiles.Models;
             WriteLiteral("</a></li>\r\n        <li>");
             EndContext();
             BeginContext(143, 79, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "47da0d51099948239b8bfc5fb330e352", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "60e0b2d2727b4f76befdcc064e8174f8", async() => {
                 BeginContext(204, 14, true);
                 WriteLiteral("Личный кабинет");
                 EndContext();
@@ -100,7 +100,7 @@ using PersonalFiles.Models;
             WriteLiteral("</li>\r\n        <li>");
             EndContext();
             BeginContext(241, 56, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "36c1355ea89b4c68a02ab46fd7760329", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "53f93dc11c6f4161ac25e4cdb6484a40", async() => {
                 BeginContext(288, 5, true);
                 WriteLiteral("Выйти");
                 EndContext();

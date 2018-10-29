@@ -76,7 +76,7 @@ using PersonalFiles.Models;
             WriteLiteral("            <div class=\"col-lg-4 col-md-6 mb-4 text-center\">\r\n                <div class=\"card person_box h-100\">\r\n                    <a href=\"#\">");
             EndContext();
             BeginContext(324, 114, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "3fbbd655d39e4ea9a0cb31961a7b2c11", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "e1313b61310b4008a855a27d362fc227", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
