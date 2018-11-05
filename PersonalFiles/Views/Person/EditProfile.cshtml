@@ -1,6 +1,250 @@
-﻿
+﻿@model EditProfileViewModel
+
 @{
     ViewData["Title"] = "EditProfile";
+}
+
+<div class="container emp-profile">
+    @using (Html.BeginForm("EditProfile", "Person", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.PersonsPosts)
+        @Html.HiddenFor(m => m.Educations)
+        @Html.HiddenFor(m => m.Image)
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="~/images/avatar.png" alt="" id="image"/>
+                    <div class="file btn btn-lg btn-primary">
+                        Сменить фото
+                        <input id="imgTnp" asp-for="Image" type="file" name="images" onchange="loadFile(event)"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>@string.Format("{0} {1}", Model.FirstName, Model.LastName)</h5>
+                    <h6>@Model.PersonsPosts.Select(p => p.Name).Aggregate((i, j) => i + ", " + j)</h6>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Инофрмация</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="passport-tab" data-toggle="tab" href="#passport" role="tab" aria-controls="passport" aria-selected="false">Паспорт</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="education-tab" data-toggle="tab" href="#education" role="tab" aria-controls="education" aria-selected="false">Образование</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance" role="tab" aria-controls="insurance" aria-selected="false">Страховка</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="post-tab" data-toggle="tab" href="#post" role="tab" aria-controls="post" aria-selected="false">Должность</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Отменить", "Profile", "Person", new { personId = Model.Id }, new { @class = "btn btn-danger" })
+                <input type="submit" class="btn btn-success" value="Сохранить" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.LastName)
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <p>
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.FirstName)
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <p>
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.MiddleName)
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Gender)
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Html.DropDownListFor(m => m.Gender, new SelectList(Enum.GetValues(typeof(PersonalFiles.Gender))), new { @class = "form-control" })</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.INN)
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <p>
+                                    @Html.TextBoxFor(m => m.INN, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.INN, "", new { @class = "text-danger" })
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.SNILS)
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <p>
+                                    @Html.TextBoxFor(m => m.SNILS, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.SNILS, "", new { @class = "text-danger" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="passport" role="tabpanel" aria-labelledby="passport-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.PassportNumber)
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <p>
+                                    @Html.TextBoxFor(m => m.PassportNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.PassportSeries)
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Html.TextBoxFor(m => m.PassportSeries, new { @class = "form-control" })</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.PassportGivenBy)
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Html.TextBoxFor(m => m.PassportGivenBy, new { @class = "form-control" })</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.PassportDateOfGive)
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Html.TextBoxFor(m => m.PassportDateOfGive, new { @class = "form-control" })</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.PassportAddress)
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Html.TextBoxFor(m => m.PassportAddress, new { @class = "form-control" })</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="education" role="tabpanel" aria-labelledby="education-tab">
+                        @for (int i = 0; i < Model.Educations.Count(); i++)
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="profile-img">
+                                        <img src="data:image;base64,@System.Convert.ToBase64String(Model.Educations[i].File)" onclick="imageResize(this)" alt="" style="cursor: pointer;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @Html.LabelFor(m => m.Educations[i].EndDate)
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Educations[i].EndDate, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Educations[i].EndDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.ActionLink("Изменить", "EditEducation", "Education", new { educationId = Model.Educations[i].Id }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Удалить", "DeleteEducation", "Education", new { personId = Model.Id, educationId = Model.Educations[i].Id }, new { @class = "btn btn-danger" })
+                            </div>
+                            <hr />
+                        }
+                        <div class="row">
+                            @Html.ActionLink("Создать", "CreateEducation", "Education", new { personId = Model.Id }, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="insurance" role="tabpanel" aria-labelledby="insrance-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.InsuranceNumber)
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Html.TextBoxFor(m => m.InsuranceNumber, new { @class = "form-control" })</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.InsuranceCompany)
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Html.TextBoxFor(m => m.InsuranceCompany, new { @class = "form-control" })</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="post" role="tabpanel" aria-labelledby="post-tab">
+                        @for(int i = 0;i < Model.PersonsPosts.Count(); i++)
+                        {
+                            var selectedPost = Model.PersonsPosts[i];
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @Html.LabelFor(m => m.PersonsPosts[i].Name)
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(m => m.SelectPost[i].PostId, new SelectList(Model.SelectPost[i].Posts, "Id", "Name", selectedPost.Id) , new { @class = "form-control" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts { 
+
+<script type="text/javascript">
+
+    var postEducation = function () {
+        $.ajax({
+            url: '/Education/CreateNewEducation',
+            type: 'POST',
+            data: $('education').serialize(),
+            success: function (result) {
+                $('#education').html(result);
+            }
+        });
+    };
+
+</script>
+
 }
 
 

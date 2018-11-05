@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace PersonalFiles.Models
 {
@@ -11,9 +12,12 @@ namespace PersonalFiles.Models
         public int PersonId { get; set; }
 
         [DisplayName("Файл")]
-        public IEnumerable<byte> File { get; set; }
-
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Это поле не может быть пустым")]
+        [FileExtensions(Extensions = "jpg|png", ErrorMessage = "Файл должен быть типа jpg или png")]
+        public byte[] File { get; set; }
+ 
         [DisplayName("Дата окончания")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Это поле не может быть пустым")]
         public DateTime EndDate { get; set; }
     }
 }

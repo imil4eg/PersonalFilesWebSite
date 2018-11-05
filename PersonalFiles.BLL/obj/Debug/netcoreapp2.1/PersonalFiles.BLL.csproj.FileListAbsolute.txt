@@ -1,5 +1,6 @@
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\bin\Debug\netcoreapp2.1\PersonalFiles.BLL.deps.json
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\bin\Debug\netcoreapp2.1\PersonalFiles.BLL.dll
+C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\bin\Debug\netcoreapp2.1\PersonalFiles.BLL.pdb
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\bin\Debug\netcoreapp2.1\PersonalFiles.DAL.dll
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\bin\Debug\netcoreapp2.1\Microsoft.Extensions.Identity.Core.dll
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\bin\Debug\netcoreapp2.1\Microsoft.Extensions.Configuration.Abstractions.dll
@@ -11,6 +12,5 @@ C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\obj\Debug\netcor
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\obj\Debug\netcoreapp2.1\PersonalFiles.BLL.AssemblyInfoInputs.cache
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\obj\Debug\netcoreapp2.1\PersonalFiles.BLL.AssemblyInfo.cs
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\obj\Debug\netcoreapp2.1\PersonalFiles.BLL.csproj.CopyComplete
-C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\bin\Debug\netcoreapp2.1\PersonalFiles.BLL.pdb
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\obj\Debug\netcoreapp2.1\PersonalFiles.BLL.dll
 C:\Users\kudryavii\source\repos\PersonalFiles\PersonalFiles.BLL\obj\Debug\netcoreapp2.1\PersonalFiles.BLL.pdb

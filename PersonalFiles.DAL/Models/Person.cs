@@ -31,7 +31,7 @@ namespace PersonalFiles.DAL
 
         //public IEnumerable<byte> Image { get; set; }
 
-        public IEnumerable<string> Posts { get; set; }
+        public IEnumerable<Position> Posts { get; set; }
     }
 
     public enum Gender

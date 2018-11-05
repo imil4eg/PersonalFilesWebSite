@@ -12,6 +12,7 @@ namespace PersonalFiles
             CreateMap<InsurancePolicy, InsuranceViewModel>();
             CreateMap<Education, EducationViewModel>();
             CreateMap<Passport, PassportViewModel>();
+            CreateMap<Position, PostViewModel>();
         }
     }
 }

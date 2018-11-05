@@ -46,6 +46,11 @@ namespace PersonalFiles.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Persons", "Person");
+            }
+
             LoginViewModel model = new LoginViewModel();
             return View(model);
         }

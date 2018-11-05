@@ -8,7 +8,7 @@ namespace PersonalFiles.BLL
         void CreateEducation(Education education);
         void DeleteEducation(int id);
         IEnumerable<Education> GetAll();
-        IEnumerable<Education> GetAllPersonsEducation(int personId);
+        IList<Education> GetAllPersonsEducation(int personId);
         Education GetEducationById(int id);
         void UpdateEducation(Education education);
     }

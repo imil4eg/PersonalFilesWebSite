@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Linq.Expressions;
 using Dapper;
 
@@ -23,8 +24,24 @@ namespace PersonalFiles.DAL
                 {
                     con.Open();
 
-                    return con.QuerySingle<Education>($@"INSET INTO [Education] ([PersonId], [File], [EndDate])
-                            VALUES (@{nameof(Education.PersonId)}, @{nameof(Education.File)}, @{nameof(Education.EndDate)}", item);
+                    using(var cmd = new SqlCommand())
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandText = "INSERT INTO [Education] ([PersonId], [File], [EndDate])" +
+                            "VALUES (@personId, @file, @endDate)";
+
+                        cmd.Parameters.Add("@personId", System.Data.SqlDbType.Int).Value = item.PersonId;
+                        cmd.Parameters.Add("@file", System.Data.SqlDbType.VarBinary, item.File.AsList().Count).Value = item.File;
+                        cmd.Parameters.Add("@endDate", System.Data.SqlDbType.Date).Value = item.EndDate;
+
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    //return con.QuerySingle<Education>($@"INSET INTO [Education] ([PersonId], [File], [EndDate])
+                    //        VALUES (@{nameof(Education.PersonId)}, @{nameof(Education.File)}, @{nameof(Education.EndDate)}",
+                    //        new { PersonId = item.PersonId, File = item.File, EndDate = item.EndDate });
+
+                    return null;
                 }
             }
             catch(Exception ex)
@@ -41,7 +58,7 @@ namespace PersonalFiles.DAL
                 {
                     con.Open();
 
-                    int rowsAffected = con.Execute($@"DELETE FROM [Education] WHERE [PersonId] = @{nameof(id)}", new { id });
+                    int rowsAffected = con.Execute($@"DELETE FROM [Education] WHERE [Id] = @{nameof(id)}", new { id });
 
                     return rowsAffected > 0;
                 }
@@ -65,7 +82,7 @@ namespace PersonalFiles.DAL
                 {
                     con.Open();
 
-                    return con.QueryFirstOrDefault<Education>($@"SELECT * FROM [Education] WHERE [PersonId] = @{nameof(id)}", new { id });
+                    return con.QueryFirstOrDefault<Education>($@"SELECT * FROM [Education] WHERE [Id] = @{nameof(id)}", new { id });
                 }
             }
             catch(Exception ex)
@@ -98,10 +115,23 @@ namespace PersonalFiles.DAL
                 using(SqlConnection con = new SqlConnection(_connectionString))
                 {
                     con.Open();
+                    int rowsAffected;
+                    using (var cmd = new SqlCommand())
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandText = "UPDATE [Education] SET [File] = @file, [EndDate] = @date " +
+                            "WHERE [Id] = @id";
 
-                    int rowsAffected = con.Execute($@"UPDATE [Education]
-                                        SET [File] = @{nameof(Education.File)}, [EndDate] = @{nameof(Education.EndDate)}
-                                        WHERE [Id] = @{nameof(Education.Id)}", item);
+                        cmd.Parameters.Add("@file", System.Data.SqlDbType.VarBinary, item.File.Count()).Value = item.File;
+                        cmd.Parameters.Add("@date", System.Data.SqlDbType.Date).Value = item.EndDate.Date;
+                        cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = item.Id;
+
+                        rowsAffected = cmd.ExecuteNonQuery();
+                    }
+
+                    //int rowsAffected = con.Execute($@"UPDATE [Education]
+                    //                    SET [File] = @{nameof(Education.File)}, [EndDate] = @{nameof(Education.EndDate)}
+                    //                    WHERE [Id] = @{nameof(Education.Id)}", item);
 
                     return rowsAffected > 0;
                 }

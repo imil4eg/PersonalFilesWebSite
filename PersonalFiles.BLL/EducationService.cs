@@ -85,9 +85,9 @@ namespace PersonalFiles.BLL
         /// </summary>
         /// <param name="personId"></param>
         /// <returns></returns>
-        public IEnumerable<Education> GetAllPersonsEducation(int personId)
+        public IList<Education> GetAllPersonsEducation(int personId)
         {
-            return this._unitOfWork.Educations.GetAll().Where(e => e.PersonId == personId);
+            return this._unitOfWork.Educations.GetAll().Where(e => e.PersonId == personId).ToList();
         }
 
         #endregion

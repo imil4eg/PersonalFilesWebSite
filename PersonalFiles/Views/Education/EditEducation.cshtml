@@ -1,0 +1,41 @@
+﻿@model EducationViewModel
+
+@{
+    ViewData["Title"] = "EditEducation";
+}
+
+<div class="container emp-profile">
+    @using (Html.BeginForm("EditEducation", "Education", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.PersonId)
+        @Html.HiddenFor(m => m.File)
+
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(m => m.File)
+            </div>
+            <div class="col-md-6">
+                <div class="profile-img">
+                    <img src="data:image;base64,@System.Convert.ToBase64String(Model.File)" onclick="imageResize(this)" id="image" />
+                </div>
+                <input type="file" asp-for="File" name="images" onchange="loadFile(event)" class="btn btn-success" />
+                @Html.ValidationMessageFor(m => m.File, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(m => m.EndDate)
+            </div>
+            <div class="col-md-6">
+                @Html.TextBoxFor(m => m.EndDate, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EndDate, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <input type="submit" class="btn btn-success" value="Сохранить" />
+            @Html.ActionLink("Отменить", "Profile", "Person", new { personId = Model.Id }, new { @class = "btn btn-danger" })
+        </div>
+    }
+</div>

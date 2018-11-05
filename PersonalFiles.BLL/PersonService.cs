@@ -88,8 +88,7 @@ namespace PersonalFiles.BLL
                 var personPositions = this._unitOfWork.PersonsPositions.GetAll()
                     .Where(pp => pp.PersonId == person.Id);
                 person.Posts = this._unitOfWork.Positions.GetAll()
-                    .Where(p => personPositions.Any(pp => pp.PositionId == p.Id))
-                    .Select(p => p.Name);
+                    .Where(p => personPositions.Any(pp => pp.PositionId == p.Id));
             }
 
             return persons;
@@ -101,8 +100,7 @@ namespace PersonalFiles.BLL
             var personPositions = this._unitOfWork.PersonsPositions.GetAll()
                     .Where(pp => pp.PersonId == person.Id);
             person.Posts = this._unitOfWork.Positions.GetAll()
-                .Where(p => personPositions.Any(pp => pp.PositionId == p.Id))
-                .Select(p => p.Name);
+                .Where(p => personPositions.Any(pp => pp.PositionId == p.Id));
 
             return person;
         }
