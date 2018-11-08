@@ -63,7 +63,6 @@ namespace PersonalFiles
                 var readUser = new ApplicationUser
                 {
                     UserName = "Reader",
-                    PasswordHash = "Reader",
                     Email = "reader@mail.ru",
                     IsDeleted = false
                 };

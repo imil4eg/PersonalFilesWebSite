@@ -14,6 +14,13 @@
           "lib/netcoreapp2.0/AutoMapper.dll": {}
         }
       },
+      "bootstrap/4.1.3": {
+        "type": "package",
+        "dependencies": {
+          "jQuery": "[3.0.0, 4.0.0)",
+          "popper.js": "[1.14.0, 2.0.0)"
+        }
+      },
       "Dapper/1.50.5": {
         "type": "package",
         "dependencies": {
@@ -27,6 +34,9 @@
         "runtime": {
           "lib/netstandard2.0/Dapper.dll": {}
         }
+      },
+      "jQuery/3.0.0": {
+        "type": "package"
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
@@ -2286,6 +2296,23 @@
           "lib/netstandard2.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {}
         }
       },
+      "Microsoft.Extensions.PlatformAbstractions/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.AppContext": "4.1.0",
+          "System.Reflection": "4.1.0",
+          "System.Reflection.Extensions": "4.0.1",
+          "System.Reflection.TypeExtensions": "4.1.0",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime.Extensions": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.Extensions.PlatformAbstractions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.Extensions.PlatformAbstractions.dll": {}
+        }
+      },
       "Microsoft.Extensions.Primitives/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -2811,6 +2838,9 @@
           "lib/netstandard1.6/NuGet.Frameworks.dll": {}
         }
       },
+      "popper.js/1.14.0": {
+        "type": "package"
+      },
       "Remotion.Linq/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -3282,6 +3312,25 @@
         },
         "compile": {
           "ref/netstandard1.3/System.Console.dll": {}
+        }
+      },
+      "System.Data.Common/4.1.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.0.11",
+          "System.Globalization": "4.0.11",
+          "System.IO": "4.1.0",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Text.RegularExpressions": "4.1.0",
+          "System.Threading.Tasks": "4.0.11"
+        },
+        "compile": {
+          "ref/netstandard1.2/System.Data.Common.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.2/System.Data.Common.dll": {}
         }
       },
       "System.Data.SqlClient/4.5.1": {
@@ -4660,6 +4709,82 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "Telerik.UI.for.AspNet.Core.Trial/2018.3.911": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.Formatters.Xml": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
+          "Microsoft.AspNetCore.Routing": "1.0.0",
+          "Microsoft.Extensions.PlatformAbstractions": "1.0.0",
+          "System.Data.Common": "4.1.0",
+          "System.Linq.Queryable": "4.0.1",
+          "System.Net.Http": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Kendo.Mvc.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Kendo.Mvc.dll": {}
+        },
+        "resource": {
+          "lib/netstandard2.0/bg-BG/Kendo.Mvc.resources.dll": {
+            "locale": "bg-BG"
+          },
+          "lib/netstandard2.0/cs-CZ/Kendo.Mvc.resources.dll": {
+            "locale": "cs-CZ"
+          },
+          "lib/netstandard2.0/da-DK/Kendo.Mvc.resources.dll": {
+            "locale": "da-DK"
+          },
+          "lib/netstandard2.0/de-DE/Kendo.Mvc.resources.dll": {
+            "locale": "de-DE"
+          },
+          "lib/netstandard2.0/es-ES/Kendo.Mvc.resources.dll": {
+            "locale": "es-ES"
+          },
+          "lib/netstandard2.0/fr-CA/Kendo.Mvc.resources.dll": {
+            "locale": "fr-CA"
+          },
+          "lib/netstandard2.0/fr-FR/Kendo.Mvc.resources.dll": {
+            "locale": "fr-FR"
+          },
+          "lib/netstandard2.0/it-IT/Kendo.Mvc.resources.dll": {
+            "locale": "it-IT"
+          },
+          "lib/netstandard2.0/nl-NL/Kendo.Mvc.resources.dll": {
+            "locale": "nl-NL"
+          },
+          "lib/netstandard2.0/pl-PL/Kendo.Mvc.resources.dll": {
+            "locale": "pl-PL"
+          },
+          "lib/netstandard2.0/pt-BR/Kendo.Mvc.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/netstandard2.0/pt-PT/Kendo.Mvc.resources.dll": {
+            "locale": "pt-PT"
+          },
+          "lib/netstandard2.0/ro-RO/Kendo.Mvc.resources.dll": {
+            "locale": "ro-RO"
+          },
+          "lib/netstandard2.0/ru-RU/Kendo.Mvc.resources.dll": {
+            "locale": "ru-RU"
+          },
+          "lib/netstandard2.0/sv-SE/Kendo.Mvc.resources.dll": {
+            "locale": "sv-SE"
+          },
+          "lib/netstandard2.0/tr-TR/Kendo.Mvc.resources.dll": {
+            "locale": "tr-TR"
+          },
+          "lib/netstandard2.0/uk-UA/Kendo.Mvc.resources.dll": {
+            "locale": "uk-UA"
+          },
+          "lib/netstandard2.0/zh-CN/Kendo.Mvc.resources.dll": {
+            "locale": "zh-CN"
+          }
+        }
+      },
       "Unity/5.8.11": {
         "type": "package",
         "dependencies": {
@@ -4739,6 +4864,56 @@
         "lib/netstandard2.0/AutoMapper.xml"
       ]
     },
+    "bootstrap/4.1.3": {
+      "sha512": "yi2n0QHkTPHFg0docVnhrlV38qkZeHk/PDUXN6P46Bn9HIwP6O8MURdpJ5G5fazwDG3eOzVDNfZi1fTfKV5vHw==",
+      "type": "package",
+      "path": "bootstrap/4.1.3",
+      "files": [
+        ".signature.p7s",
+        "bootstrap.4.1.3.nupkg.sha512",
+        "bootstrap.nuspec",
+        "content/Content/bootstrap-grid.css",
+        "content/Content/bootstrap-grid.css.map",
+        "content/Content/bootstrap-grid.min.css",
+        "content/Content/bootstrap-grid.min.css.map",
+        "content/Content/bootstrap-reboot.css",
+        "content/Content/bootstrap-reboot.css.map",
+        "content/Content/bootstrap-reboot.min.css",
+        "content/Content/bootstrap-reboot.min.css.map",
+        "content/Content/bootstrap.css",
+        "content/Content/bootstrap.css.map",
+        "content/Content/bootstrap.min.css",
+        "content/Content/bootstrap.min.css.map",
+        "content/Scripts/bootstrap.bundle.js",
+        "content/Scripts/bootstrap.bundle.js.map",
+        "content/Scripts/bootstrap.bundle.min.js",
+        "content/Scripts/bootstrap.bundle.min.js.map",
+        "content/Scripts/bootstrap.js",
+        "content/Scripts/bootstrap.js.map",
+        "content/Scripts/bootstrap.min.js",
+        "content/Scripts/bootstrap.min.js.map",
+        "contentFiles/Content/bootstrap-grid.css",
+        "contentFiles/Content/bootstrap-grid.css.map",
+        "contentFiles/Content/bootstrap-grid.min.css",
+        "contentFiles/Content/bootstrap-grid.min.css.map",
+        "contentFiles/Content/bootstrap-reboot.css",
+        "contentFiles/Content/bootstrap-reboot.css.map",
+        "contentFiles/Content/bootstrap-reboot.min.css",
+        "contentFiles/Content/bootstrap-reboot.min.css.map",
+        "contentFiles/Content/bootstrap.css",
+        "contentFiles/Content/bootstrap.css.map",
+        "contentFiles/Content/bootstrap.min.css",
+        "contentFiles/Content/bootstrap.min.css.map",
+        "contentFiles/Scripts/bootstrap.bundle.js",
+        "contentFiles/Scripts/bootstrap.bundle.js.map",
+        "contentFiles/Scripts/bootstrap.bundle.min.js",
+        "contentFiles/Scripts/bootstrap.bundle.min.js.map",
+        "contentFiles/Scripts/bootstrap.js",
+        "contentFiles/Scripts/bootstrap.js.map",
+        "contentFiles/Scripts/bootstrap.min.js",
+        "contentFiles/Scripts/bootstrap.min.js.map"
+      ]
+    },
     "Dapper/1.50.5": {
       "sha512": "1vPpX7WQmQCIb7rwlGOUoVs/yWZhVKvdhuG7WrJV+V+qsP8btnrrCqVWHENAlJxBAnUw5rhWfmuba9/Egei9MA==",
       "type": "package",
@@ -4752,6 +4927,27 @@
         "lib/netstandard1.3/Dapper.xml",
         "lib/netstandard2.0/Dapper.dll",
         "lib/netstandard2.0/Dapper.xml"
+      ]
+    },
+    "jQuery/3.0.0": {
+      "sha512": "FXANjZia/vux9/ObNiPwh2zNWuzcgHMKXia1OQrviuf0OKPBWB2TBIVAICgtObuzEW+XLyaBEoVuOUlMXy0kNA==",
+      "type": "package",
+      "path": "jquery/3.0.0",
+      "files": [
+        ".signature.p7s",
+        "Content/Scripts/jquery-3.0.0-vsdoc.js",
+        "Content/Scripts/jquery-3.0.0.js",
+        "Content/Scripts/jquery-3.0.0.min.js",
+        "Content/Scripts/jquery-3.0.0.min.map",
+        "Content/Scripts/jquery-3.0.0.slim.js",
+        "Content/Scripts/jquery-3.0.0.slim.min.js",
+        "Content/Scripts/jquery-3.0.0.slim.min.map",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/jquery-3.0.0.intellisense.js",
+        "Tools/uninstall.ps1",
+        "jquery.3.0.0.nupkg.sha512",
+        "jquery.nuspec"
       ]
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -6700,6 +6896,20 @@
         "microsoft.extensions.options.configurationextensions.nuspec"
       ]
     },
+    "Microsoft.Extensions.PlatformAbstractions/1.0.0": {
+      "sha512": "K9w3Sg4KYIiVIjMfydspewLWXYs6RynJZHPcZRwvcMgS5fbT3qA6gs24xmlo5zBNUInQK8NttVc6R5bH1RJndA==",
+      "type": "package",
+      "path": "microsoft.extensions.platformabstractions/1.0.0",
+      "files": [
+        ".signature.p7s",
+        "lib/net451/Microsoft.Extensions.PlatformAbstractions.dll",
+        "lib/net451/Microsoft.Extensions.PlatformAbstractions.xml",
+        "lib/netstandard1.3/Microsoft.Extensions.PlatformAbstractions.dll",
+        "lib/netstandard1.3/Microsoft.Extensions.PlatformAbstractions.xml",
+        "microsoft.extensions.platformabstractions.1.0.0.nupkg.sha512",
+        "microsoft.extensions.platformabstractions.nuspec"
+      ]
+    },
     "Microsoft.Extensions.Primitives/2.1.1": {
       "sha512": "Svz25/egj1TsNL4118jyMqkhDiu0l8QYWq2p52P4BBN0GbqwR18ZRIctSP5TTDJy0m0EFC8aB2FOVjGtvEGWSA==",
       "type": "package",
@@ -7656,6 +7866,41 @@
         "nuget.frameworks.nuspec"
       ]
     },
+    "popper.js/1.14.0": {
+      "sha512": "SPxZdXknelgQ015wey7GMZvsVdt/SyEmHYORhEp5k/uF9MUk9DPtkn+6dR98fud2hVWJjZm9KKr474+r7WQt+A==",
+      "type": "package",
+      "path": "popper.js/1.14.0",
+      "files": [
+        "content/Scripts/README.md",
+        "content/Scripts/esm/popper-utils.js",
+        "content/Scripts/esm/popper-utils.js.map",
+        "content/Scripts/esm/popper-utils.min.js",
+        "content/Scripts/esm/popper-utils.min.js.map",
+        "content/Scripts/esm/popper.js",
+        "content/Scripts/esm/popper.js.map",
+        "content/Scripts/esm/popper.min.js",
+        "content/Scripts/esm/popper.min.js.map",
+        "content/Scripts/index.d.ts",
+        "content/Scripts/popper-utils.js",
+        "content/Scripts/popper-utils.js.map",
+        "content/Scripts/popper-utils.min.js",
+        "content/Scripts/popper-utils.min.js.map",
+        "content/Scripts/popper.js",
+        "content/Scripts/popper.js.map",
+        "content/Scripts/popper.min.js",
+        "content/Scripts/popper.min.js.map",
+        "content/Scripts/umd/popper-utils.js",
+        "content/Scripts/umd/popper-utils.js.map",
+        "content/Scripts/umd/popper-utils.min.js",
+        "content/Scripts/umd/popper-utils.min.js.map",
+        "content/Scripts/umd/popper.js",
+        "content/Scripts/umd/popper.js.map",
+        "content/Scripts/umd/popper.min.js",
+        "content/Scripts/umd/popper.min.js.map",
+        "popper.js.1.14.0.nupkg.sha512",
+        "popper.js.nuspec"
+      ]
+    },
     "Remotion.Linq/2.2.0": {
       "sha512": "fK/76UmpC0FXBlGDFVPLJHQlDLYnGC+XY3eoDgCgbtrhi0vzbXDQ3n/IYHhqSKqXQfGw/u04A1drWs7rFVkRjw==",
       "type": "package",
@@ -8449,6 +8694,56 @@
         "ref/xamarinwatchos10/_._",
         "system.console.4.3.0.nupkg.sha512",
         "system.console.nuspec"
+      ]
+    },
+    "System.Data.Common/4.1.0": {
+      "sha512": "DeahGetUucjHvnBefS9NPhnkQunFmJ/DEI+88kHe49Grj8jUW2VYI8O+fI4N24zyHDF78qMUT74/WLWlD9KKeA==",
+      "type": "package",
+      "path": "system.data.common/4.1.0",
+      "files": [
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net451/System.Data.Common.dll",
+        "lib/netstandard1.2/System.Data.Common.dll",
+        "lib/portable-net451+win8+wp8+wpa81/System.Data.Common.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net451/System.Data.Common.dll",
+        "ref/netstandard1.2/System.Data.Common.dll",
+        "ref/netstandard1.2/System.Data.Common.xml",
+        "ref/netstandard1.2/de/System.Data.Common.xml",
+        "ref/netstandard1.2/es/System.Data.Common.xml",
+        "ref/netstandard1.2/fr/System.Data.Common.xml",
+        "ref/netstandard1.2/it/System.Data.Common.xml",
+        "ref/netstandard1.2/ja/System.Data.Common.xml",
+        "ref/netstandard1.2/ko/System.Data.Common.xml",
+        "ref/netstandard1.2/ru/System.Data.Common.xml",
+        "ref/netstandard1.2/zh-hans/System.Data.Common.xml",
+        "ref/netstandard1.2/zh-hant/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/System.Data.Common.dll",
+        "ref/portable-net451+win8+wp8+wpa81/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/de/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/es/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/fr/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/it/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ja/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ko/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ru/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/zh-hans/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/zh-hant/System.Data.Common.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.data.common.4.1.0.nupkg.sha512",
+        "system.data.common.nuspec"
       ]
     },
     "System.Data.SqlClient/4.5.1": {
@@ -12443,6 +12738,74 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "Telerik.UI.for.AspNet.Core.Trial/2018.3.911": {
+      "sha512": "s5EKmEAs5QJ/XkNPk3vCkBKza7/mQV//7FJx5mT4QsKu2Rl+bFoZvMBhxIvGh5MwIA2V6TVHNDKvxVURygCLyw==",
+      "type": "package",
+      "path": "telerik.ui.for.aspnet.core.trial/2018.3.911",
+      "files": [
+        ".signature.p7s",
+        "lib/net451/Kendo.Mvc.dll",
+        "lib/net451/Kendo.Mvc.xml",
+        "lib/net451/bg-BG/Kendo.Mvc.resources.dll",
+        "lib/net451/cs-CZ/Kendo.Mvc.resources.dll",
+        "lib/net451/da-DK/Kendo.Mvc.resources.dll",
+        "lib/net451/de-DE/Kendo.Mvc.resources.dll",
+        "lib/net451/es-ES/Kendo.Mvc.resources.dll",
+        "lib/net451/fr-CA/Kendo.Mvc.resources.dll",
+        "lib/net451/fr-FR/Kendo.Mvc.resources.dll",
+        "lib/net451/it-IT/Kendo.Mvc.resources.dll",
+        "lib/net451/nl-NL/Kendo.Mvc.resources.dll",
+        "lib/net451/pl-PL/Kendo.Mvc.resources.dll",
+        "lib/net451/pt-BR/Kendo.Mvc.resources.dll",
+        "lib/net451/pt-PT/Kendo.Mvc.resources.dll",
+        "lib/net451/ro-RO/Kendo.Mvc.resources.dll",
+        "lib/net451/ru-RU/Kendo.Mvc.resources.dll",
+        "lib/net451/sv-SE/Kendo.Mvc.resources.dll",
+        "lib/net451/tr-TR/Kendo.Mvc.resources.dll",
+        "lib/net451/uk-UA/Kendo.Mvc.resources.dll",
+        "lib/net451/zh-CN/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/Kendo.Mvc.dll",
+        "lib/netstandard1.6/bg-BG/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/cs-CZ/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/da-DK/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/de-DE/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/es-ES/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/fr-CA/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/fr-FR/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/it-IT/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/nl-NL/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/pl-PL/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/pt-BR/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/pt-PT/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/ro-RO/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/ru-RU/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/sv-SE/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/tr-TR/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/uk-UA/Kendo.Mvc.resources.dll",
+        "lib/netstandard1.6/zh-CN/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/Kendo.Mvc.dll",
+        "lib/netstandard2.0/bg-BG/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/cs-CZ/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/da-DK/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/de-DE/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/es-ES/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/fr-CA/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/fr-FR/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/it-IT/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/nl-NL/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/pl-PL/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/pt-BR/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/pt-PT/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/ro-RO/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/ru-RU/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/sv-SE/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/tr-TR/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/uk-UA/Kendo.Mvc.resources.dll",
+        "lib/netstandard2.0/zh-CN/Kendo.Mvc.resources.dll",
+        "telerik.ui.for.aspnet.core.trial.2018.3.911.nupkg.sha512",
+        "telerik.ui.for.aspnet.core.trial.nuspec"
+      ]
+    },
     "Unity/5.8.11": {
       "sha512": "C9LCcDvwJBXDx/A3Tlc5AUGfEv9WWAk8ZL+OwK7vrS3tqImlRpw+sFNY4nyzkdPMyyuwpYG4Jov3PHvhFJyNdw==",
       "type": "package",
@@ -12600,7 +12963,9 @@
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.NETCore.App >= 2.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.1",
-      "PersonalFiles.BLL >= 1.0.0"
+      "PersonalFiles.BLL >= 1.0.0",
+      "Telerik.UI.for.AspNet.Core.Trial >= 2018.3.911",
+      "bootstrap >= 4.1.3"
     ]
   },
   "packageFolders": {
@@ -12667,6 +13032,14 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[2.1.1, )"
+          },
+          "Telerik.UI.for.AspNet.Core.Trial": {
+            "target": "Package",
+            "version": "[2018.3.911, )"
+          },
+          "bootstrap": {
+            "target": "Package",
+            "version": "[4.1.3, )"
           }
         },
         "imports": [

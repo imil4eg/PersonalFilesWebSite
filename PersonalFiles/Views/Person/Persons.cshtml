@@ -10,15 +10,19 @@
         {
             <div class="col-lg-4 col-md-6 mb-4 text-center">
                 <div class="card person_box h-100">
-                    <a href="#"><img class="rounded-circle img-circle d-block mx-auto" src="~/images/avatar.png" width="200" height="200" alt=""/></a>
+                    @if (person.Image.Length == 0)
+                    {
+                        <a href="#"><img class="rounded-circle img-circle d-block mx-auto" src="~/images/avatar.png" width="200" height="200" alt=""/></a>
+                    }
+                    else
+                    {
+                        <a href="#"><img class="rounded-circle img-circle d-block mx-auto" src="data:image;base64,@System.Convert.ToBase64String(person.Image)" width="200" height="200" alt=""/></a>
+                    }
                     <div class="card-body">
                         <h4 class="card-title">
                             @Html.ActionLink(string.Format("{0} {1}", person.FirstName, person.LastName), "Profile", "Person", new { personId = person.Id })
                         </h4>
-                        @foreach (var post in person.Posts)
-                        {
-                            <p>@string.Format("{0} ", post.Name)</p>
-                        }
+                            <p>@string.Format("{0} ", person.Post.Name)</p>
                     </div>
                 </div>
             </div>

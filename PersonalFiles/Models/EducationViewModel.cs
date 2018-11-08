@@ -12,12 +12,10 @@ namespace PersonalFiles.Models
         public int PersonId { get; set; }
 
         [DisplayName("Файл")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Это поле не может быть пустым")]
         [FileExtensions(Extensions = "jpg|png", ErrorMessage = "Файл должен быть типа jpg или png")]
         public byte[] File { get; set; }
  
         [DisplayName("Дата окончания")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Это поле не может быть пустым")]
         public DateTime EndDate { get; set; }
     }
 }

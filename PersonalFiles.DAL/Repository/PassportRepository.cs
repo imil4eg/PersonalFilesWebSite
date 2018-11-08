@@ -99,7 +99,8 @@ namespace PersonalFiles.DAL
                     con.Open();
                     int rowsAffected = con.Execute($@"UPDATE [Passport]
                                         SET [Number] = @{nameof(Passport.Number)}, [Series] = @{nameof(Passport.Series)}, [GivenBy] = @{nameof(Passport.GivenBy)},
-                                        [DateOfGive] = @{nameof(Passport.DateOfGive)}, [Address] = @{nameof(Passport.Address)}", item);
+                                        [DateOfGive] = @{nameof(Passport.DateOfGive)}, [Address] = @{nameof(Passport.Address)}
+                                        WHERE [PersonId] = @{nameof(Passport.PersonId)}", item);
 
                     return rowsAffected > 0;
                 }

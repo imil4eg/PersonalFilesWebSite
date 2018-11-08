@@ -2,8 +2,21 @@
 {
     <ul class="nav navbar-nav navbar-right">
         <li><a>@User.Identity.Name</a></li>
-        <li><a asp-area="" asp-controller="Profile" asp-action="Profile">Личный кабинет</a></li>
-        <li><a asp-area="" asp-controller="" asp-action="">Выйти</a></li>
+        @if (!User.IsInRole("Read"))
+        {
+            <li><a asp-controller="" asp-action="">Пользователи</a></li>
+            <li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Создать</a>
+                <ul class="dropdown-menu">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-controller="Authorization" asp-action="RegisterUser">Добавить пользователя</a></li>
+                    }
+                    <li><a asp-controller="Person" asp-action="CreateProfile">Создать работника</a></li>
+                </ul>
+            </li>
+        }
+        <li><a asp-controller="Authorization" asp-action="LogOff">Выйти</a></li>
     </ul>
 }
 @*else

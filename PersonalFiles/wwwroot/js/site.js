@@ -6,7 +6,16 @@
 var loadFile = function (event) {
     var reader = new FileReader();
     reader.onload = function () {
-        var output = document.getElementById('image');
+        var output = document.getElementById('profileImage');
+        output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+};
+
+var loadEducationFile = function (event) {
+    var reader = new FileReader();
+    reader.onload = function () {
+        var output = document.getElementById('educationImage');
         output.src = reader.result;
     };
     reader.readAsDataURL(event.target.files[0]);
@@ -28,7 +37,15 @@ var imageResize = function (sender) {
 
     sender.style.width = (thisWidth - 10) + 'px';
 
-    setTimeout(function (){
+    setTimeout(function () {
         sender.style.width = (thisWidth + 10) + 'px';
     }, 500);
-}
+};
+
+$(function () {
+    $('.datepicker-inline').datepicker({
+        language: 'ru',
+        format: 'dd-mm-yyyy'
+    });
+});
+

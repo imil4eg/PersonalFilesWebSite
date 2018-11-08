@@ -14,14 +14,34 @@ namespace PersonalFiles.DAL
     /// <summary>
     /// Class of roles
     /// </summary>
-    public class RoleStore : IRoleStore<ApplicationRole>
+    public class RoleStore : IRoleStore<ApplicationRole>, IQueryableRoleStore<ApplicationRole>
     {
         #region private Fileds
 
         private readonly string _connectionString;
 
-        #endregion        
-        
+        public IQueryable<ApplicationRole> Roles
+        {
+            get
+            {
+                try
+                {
+                    using(var con = new SqlConnection(_connectionString))
+                    {
+                        con.Open();
+
+                        return con.Query<ApplicationRole>("SELECT * FROM [ApplicationRole]").AsQueryable();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
+
+        #endregion
+
         #region Constructor
 
         /// <summary>

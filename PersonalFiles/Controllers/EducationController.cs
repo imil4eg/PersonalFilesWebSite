@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PersonalFiles.BLL;
 using PersonalFiles.DAL;
@@ -9,6 +10,7 @@ using System.Linq;
 
 namespace PersonalFiles.Controllers
 {
+    [Authorize]
     public class EducationController : Controller
     {
 
@@ -55,8 +57,16 @@ namespace PersonalFiles.Controllers
         [ValidateAntiForgeryToken]
         public async System.Threading.Tasks.Task<IActionResult> CreateEducation(EducationViewModel model)
         {
+            var files = HttpContext.Request.Form.Files;
+            if(files.Count == 0)
+            {
+                ModelState.AddModelError("", "Загрузите файл!");
+                return View(model);
+            }
+
             if (model.EndDate.Equals(default(DateTime)))
             {
+                ModelState.AddModelError("", "Выберите дату!");
                 return View(model);
             }
 
@@ -67,12 +77,6 @@ namespace PersonalFiles.Controllers
             };
 
             var allowedExtensions = new[] { ".png", ".jpg" };
-            var files = HttpContext.Request.Form.Files;
-
-            if(files.Count == 0)
-            {
-                return View(model);
-            }
 
             using(var memoryStream = new MemoryStream())
             {

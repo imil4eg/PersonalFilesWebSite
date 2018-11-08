@@ -29,9 +29,9 @@ namespace PersonalFiles.DAL
         [StringLength(13)]
         public string INN { get; set; }
 
-        //public IEnumerable<byte> Image { get; set; }
+       public IEnumerable<byte> Image { get; set; }
 
-        public IEnumerable<Position> Posts { get; set; }
+        public Position Post { get; set; }
     }
 
     public enum Gender

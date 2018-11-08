@@ -29,8 +29,11 @@
                 @Html.LabelFor(m => m.EndDate)
             </div>
             <div class="col-md-6">
-                @Html.TextBoxFor(m => m.EndDate, null, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.EndDate, null, new { @class = "text-danger" })
+                <div class="input-group date datepicker-inline">
+                    @Html.TextBoxFor(m => m.EndDate, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.EndDate, null, new { @class = "text-danger" })
+                    <div class="input-group-addon glyphicon glyphicon-th"></div>
+                </div>
             </div>
         </div>
         <div class="row">

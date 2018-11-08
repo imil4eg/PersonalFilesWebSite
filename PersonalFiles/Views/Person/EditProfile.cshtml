@@ -8,14 +8,30 @@
     @using (Html.BeginForm("EditProfile", "Person", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
-        @Html.HiddenFor(m => m.PersonsPosts)
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.PersonsPost)
         @Html.HiddenFor(m => m.Educations)
         @Html.HiddenFor(m => m.Image)
+        @Html.HiddenFor(m => m.PassportSeries)
+        @Html.HiddenFor(m => m.PassportNumber)
+        @Html.HiddenFor(m => m.PassportGivenBy)
+        @Html.HiddenFor(m => m.PassportAddress)
+        @Html.HiddenFor(m => m.PassportDateOfGive)
+        @Html.HiddenFor(m => m.InsuranceNumber)
+        @Html.HiddenFor(m => m.InsuranceCompany)
+        @Html.HiddenFor(m => m.PersonsPost.Id)
 
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img src="~/images/avatar.png" alt="" id="image"/>
+                    @if (Model.Image.Length == 0)
+                    {
+                        <img src="~/images/avatar.png" alt="" id="profileImage"/>
+                    }
+                    else
+                    {
+                        <img src="data:image;base64,@System.Convert.ToBase64String(Model.Image)" alt="" id="profileImage" />
+                    }
                     <div class="file btn btn-lg btn-primary">
                         Сменить фото
                         <input id="imgTnp" asp-for="Image" type="file" name="images" onchange="loadFile(event)"/>
@@ -25,7 +41,7 @@
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>@string.Format("{0} {1}", Model.FirstName, Model.LastName)</h5>
-                    <h6>@Model.PersonsPosts.Select(p => p.Name).Aggregate((i, j) => i + ", " + j)</h6>
+                    <h6>@Model.PersonsPost.Name</h6>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Инофрмация</a>
@@ -46,7 +62,8 @@
                 </div>
             </div>
             <div class="col-md-2">
-                @Html.ActionLink("Отменить", "Profile", "Person", new { personId = Model.Id }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Отменить", "Profile", "Person", new { personId = Model.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Удалить", "DeleteProfile", "Person", new { personId = Model.Id }, new { @class = "btn btn-danger" })
                 <input type="submit" class="btn btn-success" value="Сохранить" />
             </div>
         </div>
@@ -149,7 +166,11 @@
                                 @Html.LabelFor(m => m.PassportDateOfGive)
                             </div>
                             <div class="col-md-6">
-                                <p>@Html.TextBoxFor(m => m.PassportDateOfGive, new { @class = "form-control" })</p>
+                                <div class="input-group date datepicker-inline">
+                                    @Html.TextBoxFor(m => m.PassportDateOfGive, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.PassportDateOfGive, null, new { @class = "text-danger" })
+                                    <div class="input-group-addon glyphicon glyphicon-th"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -209,18 +230,14 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="post" role="tabpanel" aria-labelledby="post-tab">
-                        @for(int i = 0;i < Model.PersonsPosts.Count(); i++)
-                        {
-                            var selectedPost = Model.PersonsPosts[i];
-                            <div class="row">
-                                <div class="col-md-6">
-                                    @Html.LabelFor(m => m.PersonsPosts[i].Name)
-                                </div>
-                                <div class="col-md-6">
-                                    @Html.DropDownListFor(m => m.SelectPost[i].PostId, new SelectList(Model.SelectPost[i].Posts, "Id", "Name", selectedPost.Id) , new { @class = "form-control" })
-                                </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.PersonsPost.Name)
                             </div>
-                        }
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(m => m.SelectPost.PostId, new SelectList(Model.SelectPost.Posts, "Id", "Name", Model.PersonsPost.Id) , new { @class = "form-control" })
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

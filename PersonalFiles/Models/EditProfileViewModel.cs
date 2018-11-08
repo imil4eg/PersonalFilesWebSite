@@ -25,7 +25,7 @@ namespace PersonalFiles.Models
         [DisplayName("Пол")]
         public Gender Gender { get; set; }
 
-        public IFormFile Image { get; set; }
+        public byte[] Image { get; set; }
 
         [DisplayName("СНИЛС")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Это поле не может быть пустым")]
@@ -64,12 +64,10 @@ namespace PersonalFiles.Models
 
         #endregion
 
-        public IList<PostViewModel> PersonsPosts { get; set; }
+        public PostViewModel PersonsPost { get; set; }
 
         public IList<EducationViewModel> Educations { get; set; }
 
-        public IList<SelectPostViewModel> SelectPost { get; set; }
-
-
+        public SelectPostViewModel SelectPost { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
+using System.Linq;
 using System.Linq.Expressions;
 
 using Dapper;
@@ -18,14 +20,40 @@ namespace PersonalFiles.DAL
 
         public Person Create(Person item)
         {
-            using(SqlConnection connection = new SqlConnection(_connectionString))
+            try
             {
-                connection.Open();
-                connection.Execute($@"INSERT INTO [Person] ([LastName], [FirstName], 
-                            [MiddleName], [Gender], [SNILS], [INN])
-                            VALUES (@{nameof(Person.LastName)}, @{nameof(Person.FirstName)}, 
-                            @{nameof(Person.MiddleName)}, @{nameof(Person.Gender)}, @{nameof(Person.SNILS)},
-                            @{nameof(Person.INN)});", item);
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    //connection.Execute($@"INSERT INTO [Person] ([LastName], [FirstName], 
+                    //            [MiddleName], [Gender], [SNILS], [INN])
+                    //            VALUES (@{nameof(Person.LastName)}, @{nameof(Person.FirstName)}, 
+                    //            @{nameof(Person.MiddleName)}, @{nameof(Person.Gender)}, @{nameof(Person.SNILS)},
+                    //            @{nameof(Person.INN)});", item);
+
+                    using (var cmd = new SqlCommand())
+                    {
+                        cmd.Connection = connection;
+                        cmd.CommandText = "INSERT INTO [Person] ([LastName], [FirstName], [MiddleName], [Gender], [SNILS], [INN], [Image])" +
+                            "VALUES (@lastname, @firstname, @middlename, @gender, @snils, @inn, @image)";
+
+                        cmd.Parameters.Add("@lastname", System.Data.SqlDbType.NVarChar).Value = item.LastName;
+                        cmd.Parameters.Add("@firstname", System.Data.SqlDbType.NVarChar).Value = item.FirstName;
+                        cmd.Parameters.AddWithValue("@middlename", item.MiddleName ?? SqlString.Null);
+                        cmd.Parameters.Add("@gender", System.Data.SqlDbType.Bit).Value = item.Gender;
+                        cmd.Parameters.Add("@snils", System.Data.SqlDbType.NVarChar).Value = item.SNILS;
+                        cmd.Parameters.Add("@inn", System.Data.SqlDbType.NVarChar).Value = item.INN;
+                        cmd.Parameters.Add("@image", System.Data.SqlDbType.VarBinary, -1).Value = item.Image ?? (object)DBNull.Value;
+
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    item.Id = this.GetAll().Last().Id;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
 
             return item;
@@ -72,10 +100,31 @@ namespace PersonalFiles.DAL
                 using (SqlConnection con = new SqlConnection(_connectionString))
                 {
                     con.Open();
-                    int rowsAffected = con.Execute($@"UPDATE [Person] SET [LastName] = @{nameof(Person.LastName)}, 
-                                    [FirstName] = @{nameof(Person.FirstName)}, [MiddleName] = @{nameof(Person.MiddleName)}, 
-                                    [Gender] = @{nameof(Person.Gender)}, [SNILS] = @{nameof(Person.SNILS)}, [INN] = @{nameof(Person.INN)}
-                                    WHERE [Id] = @{nameof(Person.Id)}", item);
+                    int rowsAffected = 0;
+                    using(var cmd = new SqlCommand())
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandText = "UPDATE [Person] SET [LastName] = @lastname, [FirstName] = @firstname, [MiddleName] = @middlename, " +
+                            "[Gender] = @gender, [SNILS] = @snils, [INN] = @inn, [Image] = @image " +
+                            "WHERE [Id] = @id";
+
+                        cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = item.Id;
+                        cmd.Parameters.Add("@lastname", System.Data.SqlDbType.NVarChar).Value = item.LastName;
+                        cmd.Parameters.Add("@firstname", System.Data.SqlDbType.NVarChar).Value = item.FirstName;
+                        cmd.Parameters.AddWithValue("@middlename", item.MiddleName ?? SqlString.Null);
+                        cmd.Parameters.Add("@gender", System.Data.SqlDbType.Bit).Value = item.Gender;
+                        cmd.Parameters.Add("@snils", System.Data.SqlDbType.NVarChar).Value = item.SNILS;
+                        cmd.Parameters.Add("@inn", System.Data.SqlDbType.NVarChar).Value = item.INN;
+                        cmd.Parameters.Add("@image", System.Data.SqlDbType.VarBinary, -1).Value = item.Image ?? (object)DBNull.Value;
+
+                        rowsAffected = cmd.ExecuteNonQuery();
+                    }
+
+
+                   // int rowsAffected = con.Execute($@"UPDATE [Person] SET [LastName] = @{nameof(Person.LastName)}, 
+                   //                 [FirstName] = @{nameof(Person.FirstName)}, [MiddleName] = @{nameof(Person.MiddleName)}, 
+                   //                 [Gender] = @{nameof(Person.Gender)}, [SNILS] = @{nameof(Person.SNILS)}, [INN] = @{nameof(Person.INN)}
+                   //                 WHERE [Id] = @{nameof(Person.Id)}", item);
 
                     return rowsAffected > 0;
                 }

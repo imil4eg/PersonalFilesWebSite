@@ -48,7 +48,7 @@ namespace PersonalFiles.DAL
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
                     await connection.OpenAsync(cancellationToken);
-                    user.Id = await connection.QuerySingleAsync<int>("INSERT INTO [ApplicationUser] ([UserName], [Email], [PasswordHash], [IsDeleted])" +
+                    user.Id = await connection.QuerySingleAsync<int>("INSERT INTO [ApplicationUser] ([UserName], [NormalizedUserName], [Email], [PasswordHash], [IsDeleted])" +
                         $"VALUES (@{nameof(ApplicationUser.UserName)}, @{nameof(ApplicationUser.NormalizedUserName)}, @{nameof(ApplicationUser.Email)}," +
                         $" @{nameof(ApplicationUser.PasswordHash)}, @{nameof(ApplicationUser.IsDeleted)});" +
                         $"SELECT CAST (SCOPE_IDENTITY() as int)", user);

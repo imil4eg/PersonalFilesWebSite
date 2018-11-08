@@ -97,7 +97,7 @@ namespace PersonalFiles.DAL
                     con.Open();
                     int rowsAffected = con.Execute($@"UPDATE [InsurancePolicy]
                         SET [Number] = @{nameof(InsurancePolicy.Number)}, [Company] = @{nameof(InsurancePolicy.Company)}
-                        WHERE [Id] = @{nameof(InsurancePolicy.PersonId)}", item);
+                        WHERE [PersonId] = @{nameof(InsurancePolicy.PersonId)}", item);
 
                     return rowsAffected > 0;
                 }

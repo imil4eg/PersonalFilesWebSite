@@ -5,7 +5,7 @@ namespace PersonalFiles.BLL
 {
     public interface IPersonService
     {
-        void CreatePerson(Person person);
+        Person CreatePerson(Person person);
         void DeletePerson(int id);
         Person GetPersonById(int id);
         IEnumerable<Person> GetPersons();

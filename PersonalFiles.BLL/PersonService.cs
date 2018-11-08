@@ -56,9 +56,9 @@ namespace PersonalFiles.BLL
         /// Creates person
         /// </summary>
         /// <param name="person"></param>
-        public void CreatePerson(Person person)
+        public Person CreatePerson(Person person)
         {
-            this._unitOfWork.Persons.Create(person);
+            return this._unitOfWork.Persons.Create(person);
         }
 
         /// <summary>
@@ -85,10 +85,9 @@ namespace PersonalFiles.BLL
 
             foreach(var person in persons)
             {
-                var personPositions = this._unitOfWork.PersonsPositions.GetAll()
-                    .Where(pp => pp.PersonId == person.Id);
-                person.Posts = this._unitOfWork.Positions.GetAll()
-                    .Where(p => personPositions.Any(pp => pp.PositionId == p.Id));
+                var personPosition = this._unitOfWork.PersonsPositions.GetAll()
+                    .FirstOrDefault(pp => pp.PersonId == person.Id);
+                person.Post = this._unitOfWork.Positions.Get(personPosition.PositionId);
             }
 
             return persons;
@@ -97,10 +96,9 @@ namespace PersonalFiles.BLL
         public Person GetPersonWithPosts(int id)
         {
             var person = this._unitOfWork.Persons.Get(id);
-            var personPositions = this._unitOfWork.PersonsPositions.GetAll()
-                    .Where(pp => pp.PersonId == person.Id);
-            person.Posts = this._unitOfWork.Positions.GetAll()
-                .Where(p => personPositions.Any(pp => pp.PositionId == p.Id));
+            var personPosition = this._unitOfWork.PersonsPositions.GetAll()
+                .FirstOrDefault(pp => pp.PersonId == person.Id);
+            person.Post = this._unitOfWork.Positions.Get(personPosition.PositionId);
 
             return person;
         }
