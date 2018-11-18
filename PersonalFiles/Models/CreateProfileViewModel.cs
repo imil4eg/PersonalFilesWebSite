@@ -73,5 +73,7 @@ namespace PersonalFiles.Models
         public EducationViewModel Education { get; set; }
 
         public SelectPostViewModel SelectPost { get; set; }
+
+        public bool CreateEducation { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace PersonalFiles.DAL
         IPassportRepository Passports { get; }
         IPersonPositionRepository PersonsPositions { get; }
         IPositionRepository Positions { get; }
+        IUserRoleRepository UserRole { get; }
     }
 }

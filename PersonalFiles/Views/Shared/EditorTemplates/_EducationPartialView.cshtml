@@ -1,0 +1,37 @@
+﻿@model EducationViewModel
+
+<div id="@string.Format("Education_{0}__Id", Model.ItemIndex)" name="@string.Format("Education[{0}].Id", Model.ItemIndex)">
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.File, new { id =  Model.ItemIndex})
+    @Html.HiddenFor(m => m.EndDate)
+    <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.File)
+        </div>
+        <div class="col-md-6">
+            <div class="profile-img">
+                <img src="" id="educationImage" />
+            </div>
+            <input type="file" asp-for="File" name="@string.Format("Education{0}.File", Model.ItemIndex)" id="@string.Format("Education_{0}__File", Model.ItemIndex)" onchange="loadEducationFile(event)" class="btn btn-success" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.EndDate)
+        </div>
+        <div class="col-md-6">
+            <div class="input-group date datepicker-inline">
+                @Html.TextBoxFor(m => m.EndDate, null, new { name = string.Format("Education{0}.EndDate", Model.ItemIndex), id = string.Format("Education_{0}__EndDate", Model.ItemIndex), @class = "form-control" })
+                <div class="input-group-addon glyphicon glyphicon-th"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+<script src="~/js/datepicker.js"></script>
+

@@ -43,7 +43,8 @@ namespace PersonalFiles
             services.AddTransient<IPassportService, PassportService>(s => new PassportService(unitOfWork));
             services.AddTransient<IInsuranceService, InsuranceService>(s => new InsuranceService(unitOfWork));
             services.AddTransient<IPositionService, PositionService>(s => new PositionService(unitOfWork));
-            services.AddTransient<IPersonPositionService, IPersonPositionService>(s => new PersonPositionService(unitOfWork));
+            services.AddTransient<IPersonPositionService, PersonPositionService>(s => new PersonPositionService(unitOfWork));
+            services.AddTransient<IUserRoleService, UserRoleService>(s => new UserRoleService(unitOfWork));
 
             var mappingConfigurator = new MapperConfiguration(mc =>
             {

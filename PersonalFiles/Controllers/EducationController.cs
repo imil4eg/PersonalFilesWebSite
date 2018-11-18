@@ -26,6 +26,8 @@ namespace PersonalFiles.Controllers
         /// </summary>
         private readonly IMapper _mapper;
 
+        public static int index = 0;
+
         #endregion
 
         #region Constructor
@@ -148,7 +150,26 @@ namespace PersonalFiles.Controllers
 
             return RedirectToAction("EditProfile", "Person", new { personId = personId });
         }
+
+        [HttpGet]
+        public IActionResult CreateEducationFromProfileCreate(CreateProfileViewModel model)
+        {
+
+
+            return View();
+        }
         
+
+        public IActionResult EducationPartial()
+        {
+
+            var educationModel = new EducationViewModel();
+            educationModel.ItemIndex = index;
+            index++;
+
+            return PartialView("~/Views/Shared/EditorTemplates/_EducationPartialView.cshtml", educationModel);
+        }
+
         #endregion
     }
 }

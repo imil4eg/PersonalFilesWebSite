@@ -31,13 +31,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">PersonalFiles</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Главная</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="About">Информация</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Контакты</a></li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a asp-area="" asp-controller="User" asp-action="Users">Администрирование</a></li>
+                        }
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>
@@ -75,11 +75,11 @@
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
         <script src="~/js/datepicker.min.js"></script>
         <script src="~/js/jquery-ui.min.js"></script>
         <script src="@Url.Content("~/jquery/jquery.min.js")"></script>
         <script src="@Url.Content("~/dist/js/bootstrap-datepicker.min.js")"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)

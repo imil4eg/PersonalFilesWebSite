@@ -11,6 +11,8 @@ namespace PersonalFiles.Models
 
         public int PersonId { get; set; }
 
+        public int ItemIndex { get; set; }
+
         [DisplayName("Файл")]
         [FileExtensions(Extensions = "jpg|png", ErrorMessage = "Файл должен быть типа jpg или png")]
         public byte[] File { get; set; }

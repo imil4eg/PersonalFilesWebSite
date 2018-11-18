@@ -289,7 +289,7 @@ namespace PersonalFiles.DAL
         {
             cancellationToken.ThrowIfCancellationRequested();
             var role = await _rolesTable.FindByNameAsync(roleName, cancellationToken);
-            var userRoles = await _userRoles.GetRolesAsync(user);
+            var userRoles = await _userRoles.GetRolesAsync(user.Id);
 
             if(role != null)
             {
@@ -299,14 +299,14 @@ namespace PersonalFiles.DAL
 
         public async Task<IList<string>> GetRolesAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
-            IEnumerable<int> rolesIds = (await _userRoles.GetRolesAsync(user)).Select(ur => ur.RoleId);
+            IEnumerable<int> rolesIds = (await _userRoles.GetRolesAsync(user.Id)).Select(ur => ur.RoleId);
             return _rolesTable.GetRolesByIds(rolesIds).Select(r => r.Name).ToList();
         }
 
         public async Task<bool> IsInRoleAsync(ApplicationUser user, string roleName, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            var userRoles = await _userRoles.GetRolesAsync(user);
+            var userRoles = await _userRoles.GetRolesAsync(user.Id);
             var role = await _rolesTable.FindByNameAsync(roleName, cancellationToken);
 
             return userRoles.Any(ur => ur.RoleId == role.Id);

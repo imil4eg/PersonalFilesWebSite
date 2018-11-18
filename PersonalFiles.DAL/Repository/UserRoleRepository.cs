@@ -12,7 +12,7 @@ namespace PersonalFiles.DAL
         private readonly string _connectionString;
 
         public UserRoleRepository(string connectionString)
-        {
+        {   
             _connectionString = connectionString;
         }
 
@@ -88,14 +88,14 @@ namespace PersonalFiles.DAL
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<UserRole>> GetRolesAsync(ApplicationUser user)
+        public async Task<IEnumerable<UserRole>> GetRolesAsync(int id)
         {
             using(var con = new SqlConnection(_connectionString))
             {
                 con.Open();
 
                 return await con.QueryAsync<UserRole>($@"SELECT * FROM [UserRole]
-                                                        WHERE UserId = @{nameof(UserRole.Id)}", new { user.Id });
+                                                        WHERE UserId = @{nameof(id)}", new { id });
             }
         }
 

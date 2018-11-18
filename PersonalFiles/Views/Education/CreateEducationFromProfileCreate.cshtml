@@ -1,0 +1,45 @@
+﻿@*@model CreateProfileViewModel
+
+@{
+    ViewData["Title"] = "CreateEducationFromProfileCreate";
+}
+
+<div class="container emp-profile">
+    @using (Html.BeginForm("CreateEducation", "Education", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Education.Last().File)
+
+        <div class="row">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(m => m.Education.Last().File)
+            </div>
+            <div class="col-md-6">
+                <div class="profile-img">
+                    <img src="" id="image" />
+                </div>
+                <input type="file" asp-for="Education.Last().File" name="images" onchange="loadFile(event)" class="btn btn-success" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(m => m.Education.Last().EndDate)
+            </div>
+            <div class="col-md-6">
+                <div class="input-group date datepicker-inline">
+                    @Html.TextBoxFor(m => m.Education.Last().EndDate, null, new { @class = "form-control" })
+                    <div class="input-group-addon glyphicon glyphicon-th"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" class="btn btn-success" value="Сохранить" />
+            @Html.ActionLink("Назад", "EditProfile", "Profile", new { personId = Model.PersonId }, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>*@
+

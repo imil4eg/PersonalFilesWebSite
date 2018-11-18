@@ -193,6 +193,7 @@ namespace PersonalFiles.Controllers
         [ValidateAntiForgeryToken]
         public async System.Threading.Tasks.Task<IActionResult> CreateProfile(CreateProfileViewModel model)
         {
+            
             if (!ModelState.IsValid)
             {
                 model.SelectPost.Posts = this._positionService.GetAllPosition();

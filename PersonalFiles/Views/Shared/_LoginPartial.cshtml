@@ -4,15 +4,15 @@
         <li><a>@User.Identity.Name</a></li>
         @if (!User.IsInRole("Read"))
         {
-            <li><a asp-controller="" asp-action="">Пользователи</a></li>
+            <li><a asp-controller="" asp-action="">Сотрудники</a></li>
             <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Создать</a>
                 <ul class="dropdown-menu">
                     @if (User.IsInRole("Admin"))
                     {
-                        <li><a asp-controller="Authorization" asp-action="RegisterUser">Добавить пользователя</a></li>
+                        <li><a asp-controller="Authorization" asp-action="RegisterUser">Создать пользователя</a></li>
                     }
-                    <li><a asp-controller="Person" asp-action="CreateProfile">Создать работника</a></li>
+                    <li><a asp-controller="Person" asp-action="CreateProfile">Создать личное дело</a></li>
                 </ul>
             </li>
         }

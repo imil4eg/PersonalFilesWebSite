@@ -13,6 +13,7 @@ namespace PersonalFiles
             CreateMap<Education, EducationViewModel>();
             CreateMap<Passport, PassportViewModel>();
             CreateMap<Position, PostViewModel>();
+            CreateMap<ApplicationUser, UserViewModel>();
         }
     }
 }

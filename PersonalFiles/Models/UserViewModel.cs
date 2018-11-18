@@ -8,6 +8,16 @@ namespace PersonalFiles.Models
 
         public string UserName { get; set; }
 
-        public ApplicationRole Role { get; set; }
+        public string NormalizedUserName { get; set; }
+
+        public string Email { get; set; }
+
+        public string PasswordHash { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public string RoleName { get; set; }
     }
 }

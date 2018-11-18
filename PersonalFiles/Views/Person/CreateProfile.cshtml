@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="~/css/datepicker.css" />
 
 <div class="container emp-profile">
-    @using (Html.BeginForm("CreateProfile", "Person", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("CreateProfile", "Person", FormMethod.Post, new { id = "postForm", enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -163,9 +163,6 @@
                     </div>
                     <div class="tab-pane fade" id="education" role="tabpanel" aria-labelledby="education-tab">
                         <div class="row">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 @Html.LabelFor(m => m.Education.File)
                             </div>
@@ -173,7 +170,7 @@
                                 <div class="profile-img">
                                     <img src="" id="educationImage" />
                                 </div>
-                                <input type="file" asp-for="Education.File" name="educationName" onchange="loadEducationFile(event)" class="btn btn-success" />
+                                <input type="file" asp-for="Education.File" name="educationImage" onchange="loadEducationFile(event)" class="btn btn-success" />
                             </div>
                         </div>
                         <div class="row">
@@ -222,5 +219,28 @@
     }
 </div>
 
-<script src="~/js/datepicker.js"></script>
+<script src="~/jquery/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnLoad').click(function () {
+            $.ajax({
+                url: '@Url.Action("EducationPartial", "Education")',
+                type: "POST",
+                success: function (content) {
+                    $('#education').prepend(content);
+                },
+                error: function (message) {
+                    alert(message);
+                }
+            }).done(function (partialViewResult) {
+                $('.datepicker-inline').datepicker({
+                    language: 'ru',
+                    format: 'dd-mm-yyyy'
+                });
+            });
+        });
+    });
+</script>
+
 
